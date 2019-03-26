@@ -1,4 +1,6 @@
 - Created products and cart modules
+- Styled everything with angular material
 - Created header component
 - Added functionality to ProductsList and Product components
 - Added cart-icon component to header
+- Implemented cart functionality
