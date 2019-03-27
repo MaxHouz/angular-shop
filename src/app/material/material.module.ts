@@ -8,26 +8,23 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatBottomSheetModule } from '@angular/material';
 import { MatListModule } from '@angular/material/list';
 
+const materialsModules = [
+  MatCardModule,
+  MatDividerModule,
+  MatToolbarModule,
+  MatButtonModule,
+  MatBadgeModule,
+  MatIconModule,
+  MatBottomSheetModule,
+  MatListModule
+];
+
 @NgModule({
   imports: [
-    MatCardModule,
-    MatDividerModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatBadgeModule,
-    MatIconModule,
-    MatBottomSheetModule,
-    MatListModule
+    ...materialsModules
   ],
   exports: [
-    MatCardModule,
-    MatDividerModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatBadgeModule,
-    MatIconModule,
-    MatBottomSheetModule,
-    MatListModule
+    ...materialsModules
   ]
 })
-export class MaterialModule { }
+export class MaterialModule {}
