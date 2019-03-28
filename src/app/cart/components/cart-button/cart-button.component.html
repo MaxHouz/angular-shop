@@ -1,0 +1,8 @@
+<button mat-button>
+  <mat-icon
+    (click)="openCartModal()"
+    [matBadge]="getProductsCount()"
+    matBadgeColor="warn">
+    shopping_cart
+  </mat-icon>
+</button>
