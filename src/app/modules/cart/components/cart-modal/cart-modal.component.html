@@ -1,13 +1,9 @@
 <mat-list *ngIf="isCartEmpty(); else emptyCart">
-  <mat-list-item *ngFor="let product of getProductsFromCart()">
-    <h4 mat-line>{{ product.name }}</h4>
-    <p mat-line> {{ product.price | currency: USD }} </p>
-    <button mat-button color="warn" (click)="deleteProduct(product)">
-      <mat-icon>
-        delete_outline
-      </mat-icon>
-    </button>
-  </mat-list-item>
+  <app-cart-item
+    *ngFor="let product of getProductsFromCart()"
+    [cartProduct]="product"
+    (deleteProduct)="onDeleteProduct($event)">
+  </app-cart-item>
   <mat-divider></mat-divider>
   <mat-list-item>
     <p class="cart-total">Total: {{ getCartTotal() | currency: USD }}</p>

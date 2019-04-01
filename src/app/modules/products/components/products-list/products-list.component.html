@@ -1,4 +1,6 @@
 <app-product
   *ngFor="let product of productsList"
   [product] = "product"
+  (addToCard)="onAddToCart($event)"
+  (buy)="onBuy($event)"
 ></app-product>

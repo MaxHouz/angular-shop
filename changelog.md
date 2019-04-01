@@ -4,3 +4,4 @@
 - Added functionality to ProductsList and Product components
 - Added cart-icon component to header
 - Implemented cart functionality
+- Refactored project structure

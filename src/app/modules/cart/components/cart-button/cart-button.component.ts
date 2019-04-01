@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '../../services/cart.service';
+import { CartService } from '../../../../core/services/cart.service';
 import { MatBottomSheet } from '@angular/material';
 import { CartModalComponent } from '../cart-modal/cart-modal.component';
 
@@ -17,7 +17,7 @@ export class CartButtonComponent implements OnInit {
   ngOnInit() {}
 
   getProductsCount(): number {
-    return this.cartService.getCartList().length;
+    return this.cartService.getCartLength();
   }
 
   openCartModal(): void {

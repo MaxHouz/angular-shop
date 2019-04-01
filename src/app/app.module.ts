@@ -1,23 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 
-import { CartModule } from './cart/cart.module';
-import { ProductsModule } from './products/products.module';
-import { HeaderComponent } from './header/header.component';
+import { CoreModule } from './core/core.module';
+import { CartModule } from './modules/cart/cart.module';
+import { ProductsModule } from './modules/products/products.module';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    MaterialModule,
+    CoreModule,
+    SharedModule,
     BrowserAnimationsModule,
     CartModule,
     ProductsModule

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../../products/models/product.model';
-import { CartService } from '../../services/cart.service';
+import { CartService } from '../../../../core/services/cart.service';
 
 @Component({
   selector: 'app-cart-modal',
@@ -24,12 +24,12 @@ export class CartModalComponent implements OnInit {
     return this.cartService.getCartTotal();
   }
 
-  deleteProduct(product: Product): void {
+  onDeleteProduct(product: Product): void {
     this.cartService.deleteProduct(product);
   }
 
   isCartEmpty(): boolean {
-    return this.cartService.isCartEmpty();
+    return !!this.cartService.getCartLength();
   }
 
   order(): void {

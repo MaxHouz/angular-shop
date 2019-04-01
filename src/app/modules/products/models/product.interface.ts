@@ -5,4 +5,5 @@ export interface IProduct {
   category: string;
   description: string;
   isAvailable: boolean;
+  quantity?: number;
 }
