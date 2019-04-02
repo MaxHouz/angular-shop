@@ -5,3 +5,4 @@
 - Added cart-icon component to header
 - Implemented cart functionality
 - Refactored project structure
+- Added functionality for quantity and price calculation

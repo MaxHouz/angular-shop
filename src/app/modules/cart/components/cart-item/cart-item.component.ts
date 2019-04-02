@@ -10,8 +10,8 @@ import { Product } from '../../../products/models/product.model';
 export class CartItemComponent implements OnInit {
   @Input() cartProduct: Product;
   @Output() deleteProduct = new EventEmitter<Product>();
-  @Output() increaseQuantity = new EventEmitter<Product>();
-  @Output() decreaseQuantity = new EventEmitter<Product>();
+  @Output() increaseQuantity = new EventEmitter<number>();
+  @Output() decreaseQuantity = new EventEmitter<number>();
 
   constructor() { }
 
@@ -20,5 +20,13 @@ export class CartItemComponent implements OnInit {
 
   onDeleteProduct(): void {
     this.deleteProduct.emit(this.cartProduct);
+  }
+
+  onIncreaseQuantity(id: number): void {
+    this.increaseQuantity.emit(id);
+  }
+
+  onDecreaseQuantity(id: number): void {
+    this.decreaseQuantity.emit(id);
   }
 }

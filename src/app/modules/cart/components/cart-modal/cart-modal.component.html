@@ -2,7 +2,9 @@
   <app-cart-item
     *ngFor="let product of getProductsFromCart()"
     [cartProduct]="product"
-    (deleteProduct)="onDeleteProduct($event)">
+    (deleteProduct)="onDeleteProduct($event)"
+    (increaseQuantity)="onIncreaseQuantity($event)"
+    (decreaseQuantity)="onDecreaseQuantity($event)">
   </app-cart-item>
   <mat-divider></mat-divider>
   <mat-list-item>

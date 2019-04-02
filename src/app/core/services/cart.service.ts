@@ -6,7 +6,6 @@ import { Product } from '../../modules/products/models/product.model';
 })
 export class CartService {
   private cartList: Product[] = [];
-  private cartLength = 0;
 
   constructor() { }
 
@@ -15,11 +14,15 @@ export class CartService {
   }
 
   getCartLength(): number {
-    return this.cartLength;
+    return this.cartList.map((product) => product.quantity)
+      .reduce((a, b) => a + b, 0);
+  }
+
+  isCartEmpty(): boolean {
+    return !!this.cartList.length;
   }
 
   addProduct(product: Product): void {
-    this.cartLength++;
     const productIndex = this.cartList.findIndex(p => p.id === product.id);
     if (productIndex > -1) {
       this.updateProduct(productIndex);
@@ -31,15 +34,28 @@ export class CartService {
   getCartTotal(): number {
     let total = 0;
 
-    this.cartList.forEach(product => total += product.price);
+    this.cartList.forEach(product => total += product.price * product.quantity);
 
     return total;
   }
 
-  deleteProduct(product): void {
+  deleteProduct(product: Product): void {
     const index = this.cartList.indexOf(product);
-    this.cartLength =  this.cartLength - this.cartList[index].quantity;
     this.cartList.splice(index, 1);
+  }
+
+  increaseQuantity(id: number): void {
+    const index = this.cartList.findIndex((product) => product.id === id);
+    this.cartList[index].quantity++;
+  }
+
+  decreaseQuantity(id: number): void {
+    const index = this.cartList.findIndex((product) => product.id === id);
+    if (this.cartList[index].quantity > 1) {
+      this.cartList[index].quantity--;
+    } else {
+      this.deleteProduct(this.cartList[index]);
+    }
   }
 
   cleanCart(): void {

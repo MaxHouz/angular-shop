@@ -28,8 +28,16 @@ export class CartModalComponent implements OnInit {
     this.cartService.deleteProduct(product);
   }
 
+  onIncreaseQuantity(id: number): void {
+    this.cartService.increaseQuantity(id);
+  }
+
+  onDecreaseQuantity(id: number): void {
+    this.cartService.decreaseQuantity(id);
+  }
+
   isCartEmpty(): boolean {
-    return !!this.cartService.getCartLength();
+    return this.cartService.isCartEmpty();
   }
 
   order(): void {
