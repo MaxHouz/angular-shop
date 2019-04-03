@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '../../../../core/services/cart.service';
+import { CartService } from '../../../core/services/cart.service';
 import { MatBottomSheet } from '@angular/material';
-import { CartModalComponent } from '../cart-modal/cart-modal.component';
+import { CartModalComponent } from '../../../modules/cart/components/cart-modal/cart-modal.component';
 
 @Component({
   selector: 'app-cart-button',

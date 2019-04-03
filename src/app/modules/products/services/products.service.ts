@@ -21,7 +21,7 @@ export class ProductsService {
       1200,
       Categories.phones,
       'Latest apple iPhone',
-      true
+      false
     ),
     new Product(
       3,
@@ -37,7 +37,7 @@ export class ProductsService {
       200,
       Categories.accessories,
       'Silicon case for apple MacBook',
-      true
+      false
     )
   ];
   constructor() { }

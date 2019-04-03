@@ -1,11 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  OnInit ,
+  Component,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { Product } from '../../../products/models/product.model';
 import { CartService } from '../../../../core/services/cart.service';
 
 @Component({
   selector: 'app-cart-modal',
   templateUrl: './cart-modal.component.html',
-  styleUrls: ['./cart-modal.component.scss']
+  styleUrls: ['./cart-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CartModalComponent implements OnInit {
 

@@ -4,5 +4,6 @@
 - Added functionality to ProductsList and Product components
 - Added cart-icon component to header
 - Implemented cart functionality
-- Refactored project structure
+- Refactored project structure(shared,core, feature modules)
 - Added functionality for quantity and price calculation
+- Added hover directive for items in cart
