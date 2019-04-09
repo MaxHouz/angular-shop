@@ -1,0 +1,23 @@
+<mat-list *ngIf="isCartEmpty(); else emptyCart">
+  <app-cart-item
+    *ngFor="let product of getProductsFromCart()"
+    [cartProduct]="product"
+    (deleteProduct)="onDeleteProduct($event)"
+    (increaseQuantity)="onIncreaseQuantity($event)"
+    (decreaseQuantity)="onDecreaseQuantity($event)">
+  </app-cart-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <p class="cart-total">Total: {{ getCartTotal() | currency: 'USD' }}</p>
+    <button (click)="order()"
+            mat-stroked-button
+            color="primary">
+      Order
+    </button>
+  </mat-list-item>
+</mat-list>
+<ng-template #emptyCart>
+  <p>
+    Your cart is empty
+  </p>
+</ng-template>
