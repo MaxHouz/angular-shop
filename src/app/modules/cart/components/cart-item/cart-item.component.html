@@ -1,6 +1,6 @@
 <mat-list-item appCartItemHover="#77B8FF">
   <h4 mat-line>{{ cartProduct.name }}</h4>
-  <p mat-line> {{ cartProduct.price * cartProduct.quantity | currency: USD }} </p>
+  <p mat-line> {{ cartProduct.price * cartProduct.quantity | currency: 'USD' }} </p>
   <div class="quantity-actions">
     <button mat-button color="primary" (click)="onDecreaseQuantity(cartProduct.id)">
       <mat-icon>

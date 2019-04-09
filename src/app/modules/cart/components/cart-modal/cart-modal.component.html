@@ -8,7 +8,7 @@
   </app-cart-item>
   <mat-divider></mat-divider>
   <mat-list-item>
-    <p class="cart-total">Total: {{ getCartTotal() | currency: USD }}</p>
+    <p class="cart-total">Total: {{ getCartTotal() | currency: 'USD' }}</p>
     <button (click)="order()"
             mat-stroked-button
             color="primary">
