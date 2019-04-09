@@ -1,0 +1,21 @@
+.contact-us {
+  margin-left: 20px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+
+  &_local-storage {
+    width: 230px;
+  }
+
+  &_config {
+    width: 400px;
+  }
+}
+
+.token {
+  cursor: pointer;
+}

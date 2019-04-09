@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { Product } from '../../modules/products/models/product.model';
+import { CoreModule } from '../core.module';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: CoreModule
 })
 export class CartService {
   private cartList: Product[] = [];
