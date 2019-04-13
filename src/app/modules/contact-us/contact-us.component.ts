@@ -27,20 +27,20 @@ export class ContactUsComponent implements OnInit {
   }
 
   onSaveToLocalStorage(): void {
-    if (this.localStorageName && this.localStorageValue) {
-      this.localStorageService.setItem(this.localStorageName, this.localStorageValue);
+    if (this.name && this.value) {
+      this.localStorageService.setItem(this.name, this.value);
     }
   }
 
   onRemoveFromLocalStorage(): void {
-    if (this.localStorageName) {
-      this.localStorageService.removeItem(this.localStorageName);
+    if (this.name) {
+      this.localStorageService.removeItem(this.name);
     }
   }
 
   onGetItemFromLocalStorage(): void {
-    if (this.localStorageName) {
-      alert(`Your value is: ${this.localStorageService.getItem(this.localStorageName)}`);
+    if (this.name) {
+      alert(`Your value is: ${this.localStorageService.getItem(this.name)}`);
     }
   }
 
@@ -57,8 +57,8 @@ export class ContactUsComponent implements OnInit {
   }
 
   onSetConfigProperty(): void {
-    if (this.localStorageName && this.localStorageValue) {
-      this.configOptionsService.setConfigProperty(this.localStorageName, this.localStorageValue);
+    if (this.name && this.value) {
+      this.configOptionsService.setConfigProperty(this.name, this.value);
     }
   }
 }
