@@ -1,0 +1,24 @@
+<section class="contact-us">
+  <p>Your unique token: <span class="token" [appContactUsFont]="48">{{ token }}</span></p>
+  <p>Your app: {{ constantsService | json }}</p>
+  Name: <input type="text" [(ngModel)]="name">
+  Value: <input type="text" [(ngModel)]="value">
+  <div>
+    <h3>Local storage</h3>
+    <div class="controls controls_local-storage">
+      <button type="button" (click)="onSaveToLocalStorage()">Save</button>
+      <button type="button" (click)="onRemoveFromLocalStorage()">Remove</button>
+      <button type="button" (click)="onGetItemFromLocalStorage()">Get Item</button>
+    </div>
+  </div>
+
+  <div>
+    <h3>Config Options</h3>
+    <div class="controls controls_config">
+      <button type="button" (click)="onShowConfigOptions()">Show</button>
+      <button type="button" (click)="onSetNewConfigObject(constantsService)">Set new</button>
+      <button type="button" (click)="onModifyConfigObject(constantsService)">Modify config</button>
+      <button type="button" (click)="onSetConfigProperty()">New config property</button>
+    </div>
+  </div>
+</section>

@@ -1,6 +1,15 @@
 .header {
   display: flex;
   justify-content: space-between;
+
+  &-menu {
+    display: flex;
+
+    &__item {
+      margin-left: 20px;
+      cursor: pointer;
+    }
+  }
 }
 .cart-icon {
   margin-right: 20px;
@@ -9,4 +18,5 @@
 
 .app-title {
   color: #ffffff;
+  cursor: pointer;
 }

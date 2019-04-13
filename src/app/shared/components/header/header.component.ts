@@ -6,6 +6,7 @@ import {
   AfterViewInit,
   AfterViewChecked
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,9 @@ import {
 export class HeaderComponent implements OnInit, AfterViewInit, AfterViewChecked {
   @ViewChild('appTitle') appTitle: ElementRef;
 
-  constructor() {}
+  constructor(
+    private router: Router
+  ) {}
 
   ngOnInit() {
     console.log('ngOnInit: ' + this.appTitle.nativeElement.innerHTML);
@@ -27,5 +30,13 @@ export class HeaderComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
   ngAfterViewChecked() {
     console.log('After viewChecked: ' + this.appTitle.nativeElement.innerHTML);
+  }
+
+  navigateHome(): void {
+    this.router.navigate(['/']);
+  }
+
+  navigateToContacts(): void {
+    this.router.navigate(['/contact-us']);
   }
 }
