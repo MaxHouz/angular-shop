@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { MaterialModule } from '../../core/material/material.module';
 
@@ -13,6 +14,7 @@ import { CartItemComponent } from './components/cart-item/cart-item.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     MaterialModule,
     SharedModule
   ],
