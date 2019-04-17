@@ -6,11 +6,14 @@ import { HeaderComponent } from './components/header/header.component';
 import { CartButtonComponent } from './components/cart-button/cart-button.component';
 import { CartItemHoverDirective } from './directives/cart-item-hover.directive';
 import { OrderByPipe } from './pipes/order-by.pipe';
+import { ContactUsFontDirective } from './directives/contact-us-font.directive';
+
 
 const shared = [
   OrderByPipe,
   HeaderComponent,
   CartButtonComponent,
+  ContactUsFontDirective,
   CartItemHoverDirective
 ];
 

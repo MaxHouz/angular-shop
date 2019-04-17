@@ -7,6 +7,9 @@
 - Refactored project structure(shared,core, feature modules)
 - Added functionality for quantity and price calculation
 - Added hover directive for items in cart
+- Added app-routing module
+- Added some demo-services to core module
+- Added demo-services presentation to contact-us page
 - Used async pipe in products-list component
 - Used uppercase pipe in products component
 - Used date and custom orderBy pipes in cart-modal component
