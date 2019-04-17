@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
 import { Categories } from '../models/categories.enum';
 
+import {Observable, of} from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +23,7 @@ export class ProductsService {
       1200,
       Categories.phones,
       'Latest apple iPhone',
-      false
+      true
     ),
     new Product(
       3,
@@ -37,12 +39,12 @@ export class ProductsService {
       200,
       Categories.accessories,
       'Silicon case for apple MacBook',
-      false
+      true
     )
   ];
   constructor() { }
 
-  getProducts(): Product[] {
-    return this.productsList;
+  getProducts(): Observable<Product[]> {
+    return of(this.productsList);
   }
 }

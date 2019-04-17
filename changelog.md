@@ -10,3 +10,6 @@
 - Added app-routing module
 - Added some demo-services to core module
 - Added demo-services presentation to contact-us page
+- Used async pipe in products-list component
+- Used uppercase pipe in products component
+- Used date and custom orderBy pipes in cart-modal component

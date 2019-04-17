@@ -1,7 +1,7 @@
 import {
-  OnInit ,
+  OnInit,
   Component,
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy, DoCheck,
 } from '@angular/core';
 import { Product } from '../../../products/models/product.model';
 import { CartService } from '../../../../core/services/cart.service';
@@ -12,13 +12,23 @@ import { CartService } from '../../../../core/services/cart.service';
   styleUrls: ['./cart-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CartModalComponent implements OnInit {
+export class CartModalComponent implements OnInit, DoCheck {
+
+  lastUpdated: number;
+  sortingOrder: boolean;
+  filteringOrder: boolean;
+  selectedSorting: string;
 
   constructor(
     private cartService: CartService
   ) { }
 
   ngOnInit() {
+  }
+
+  ngDoCheck(): void {
+    this.lastUpdated = Date.now();
+    console.log(this.filteringOrder);
   }
 
   getProductsFromCart(): Product[] {
@@ -48,5 +58,9 @@ export class CartModalComponent implements OnInit {
   order(): void {
     alert(`Your order price is: $${this.getCartTotal()}`);
     this.cartService.cleanCart();
+  }
+
+  getSortingOrder(): string {
+    return this.sortingOrder ? 'Ascending' : 'Descending';
   }
 }
