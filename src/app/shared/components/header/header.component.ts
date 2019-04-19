@@ -39,4 +39,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, AfterViewChecked 
   navigateToContacts(): void {
     this.router.navigate(['/contact-us']);
   }
+  navigateToProductsList(): void {
+    this.router.navigate(['/products-list']);
+  }
 }

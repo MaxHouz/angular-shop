@@ -1,0 +1,24 @@
+.product-info {
+  width: 30%;
+  margin: 40px auto 0 auto;
+  text-align: center;
+  padding: 40px;
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+  }
+
+  &__actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__order-button{
+    padding: 8px 30px;
+    font-size: 18px;
+  }
+}

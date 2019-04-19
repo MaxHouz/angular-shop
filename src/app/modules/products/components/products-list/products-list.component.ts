@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
@@ -16,6 +17,7 @@ export class ProductsListComponent implements OnInit {
   public productsList: Observable<Product[]>;
 
   constructor(
+    private router: Router,
     private cartService: CartService,
     private productsService: ProductsService
   ) {}
@@ -24,11 +26,12 @@ export class ProductsListComponent implements OnInit {
     this.productsList = this.productsService.getProducts();
   }
 
-  onBuy(product: Product) {
-    alert(`You bought ${product.name}`);
+  onBuy(product: Product): void {
+    this.onAddToCart(product);
+    this.router.navigate(['/order']);
   }
 
-  onAddToCart(product: Product) {
+  onAddToCart(product: Product): void {
     this.cartService.addProduct(product);
   }
 }

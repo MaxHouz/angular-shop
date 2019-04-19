@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
 import { Categories } from '../models/categories.enum';
 
-import {Observable, of} from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +47,11 @@ export class ProductsService {
 
   getProducts(): Observable<Product[]> {
     return of(this.productsList);
+  }
+
+  getProduct(id: number | string): Observable<Product> {
+    return this.getProducts().pipe(
+      map((products: Product[]) => products.find(product => product.id === +id))
+    );
   }
 }
