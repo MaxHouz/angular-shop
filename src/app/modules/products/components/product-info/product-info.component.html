@@ -25,6 +25,11 @@
                 (click)="buy()"
         >Buy</button>
         <button mat-stroked-button
+                class="product-info__order-button"
+                [disabled]="!product.isAvailable"
+                (click)="showFeedback()"
+        >Feedback</button>
+        <button mat-stroked-button
                 color="accent"
                 class="product-info__order-button"
                 [disabled]="!product.isAvailable"
@@ -33,4 +38,3 @@
       </div>
     </mat-card-content>
 </mat-card>
-

@@ -19,7 +19,7 @@ export class ProductInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private cartService: CartService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
   ) { }
 
   ngOnInit() {
@@ -37,5 +37,9 @@ export class ProductInfoComponent implements OnInit {
 
   addToCart(): void {
     this.cartService.addProduct(this.product);
+  }
+
+  showFeedback(): void {
+    this.router.navigate([{outlets: { feedback: ['feedback'] }}]);
   }
 }

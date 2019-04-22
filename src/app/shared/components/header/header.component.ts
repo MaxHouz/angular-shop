@@ -36,6 +36,10 @@ export class HeaderComponent implements OnInit, AfterViewInit, AfterViewChecked 
     this.router.navigate(['/']);
   }
 
+  navigateToCart(): void {
+    this.router.navigate(['/cart']);
+  }
+
   navigateToContacts(): void {
     this.router.navigate(['/contact-us']);
   }

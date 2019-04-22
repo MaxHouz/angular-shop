@@ -1,20 +1,14 @@
-import {
-  OnInit,
-  Component,
-  ChangeDetectionStrategy, DoCheck,
-} from '@angular/core';
-import { Product } from '../../../products/models/product.model';
-import { CartService } from '../../../../core/services/cart.service';
+import { Component, OnInit } from '@angular/core';
+import {CartService} from '../../../../core/services/cart.service';
+import {Product} from '../../../products/models/product.model';
 
 @Component({
-  selector: 'app-cart-modal',
-  templateUrl: './cart-modal.component.html',
-  styleUrls: ['./cart-modal.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.scss']
 })
-export class CartModalComponent implements OnInit, DoCheck {
+export class CartComponent implements OnInit {
 
-  lastUpdated: number;
   sortingOrder: boolean;
   selectedSorting: string;
 
@@ -23,10 +17,6 @@ export class CartModalComponent implements OnInit, DoCheck {
   ) { }
 
   ngOnInit() {
-  }
-
-  ngDoCheck(): void {
-    this.lastUpdated = Date.now();
   }
 
   getProductsFromCart(): Product[] {
