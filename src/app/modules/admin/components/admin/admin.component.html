@@ -1,0 +1,21 @@
+<mat-toolbar color="warn" class="admin-header">
+    <button
+      mat-button
+      class="admin-header__item"
+      (click)="navigateToAdminProducts()">
+      Products list
+    </button>
+    <button
+      mat-button
+      class="admin-header__item"
+      (click)="navigateAddProduct()">
+      Add product
+    </button>
+    <button
+      mat-button
+      class="admin-header__item"
+      (click)="navigateToOrders()">
+      Orders
+    </button>
+</mat-toolbar>
+<router-outlet></router-outlet>

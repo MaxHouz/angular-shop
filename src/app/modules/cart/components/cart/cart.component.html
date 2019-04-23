@@ -1,5 +1,5 @@
 <section class="cart">
-  <mat-list *ngIf="isCartEmpty(); else emptyCart">
+  <mat-list *ngIf="!isCartEmpty(); else emptyCart">
     <mat-form-field>
       <mat-label>Sort by:</mat-label>
       <mat-select [(value)]="selectedSorting">

@@ -3,6 +3,8 @@ import {
   Component,
   ChangeDetectionStrategy, DoCheck,
 } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Product } from '../../../products/models/product.model';
 import { CartService } from '../../../../core/services/cart.service';
 
@@ -19,6 +21,7 @@ export class CartModalComponent implements OnInit, DoCheck {
   selectedSorting: string;
 
   constructor(
+    private router: Router,
     private cartService: CartService
   ) { }
 
@@ -54,8 +57,7 @@ export class CartModalComponent implements OnInit, DoCheck {
   }
 
   order(): void {
-    alert(`Your order price is: $${this.getCartTotal()}`);
-    this.cartService.cleanCart();
+    this.router.navigate(['/order']);
   }
 
   getSortingOrder(): string {

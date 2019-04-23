@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,9 +11,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatBottomSheetModule } from '@angular/material';
 
-const materialsModules = [
+const materialModules = [
   MatListModule,
   MatCardModule,
+  MatTabsModule,
   MatIconModule,
   MatBadgeModule,
   MatButtonModule,
@@ -25,10 +27,10 @@ const materialsModules = [
 
 @NgModule({
   imports: [
-    ...materialsModules
+    ...materialModules
   ],
   exports: [
-    ...materialsModules
+    ...materialModules
   ]
 })
 export class MaterialModule {}

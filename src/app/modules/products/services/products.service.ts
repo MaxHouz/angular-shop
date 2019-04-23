@@ -54,4 +54,20 @@ export class ProductsService {
       map((products: Product[]) => products.find(product => product.id === +id))
     );
   }
+
+  updateProduct(product: Product): void {
+    const i = this.productsList.findIndex(p => p.id === product.id);
+
+    if (i > -1) {
+      this.productsList.splice(i, 1, product);
+    }
+  }
+
+  deleteProduct(id: number): void {
+    const i = this.productsList.findIndex(p => p.id === id);
+
+    if (i > -1) {
+      this.productsList.splice(i, 1);
+    }
+  }
 }

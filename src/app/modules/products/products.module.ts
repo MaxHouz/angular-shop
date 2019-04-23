@@ -24,7 +24,6 @@ import { ProductFeedbackComponent } from './components/product-feedback/product-
   ],
   exports: [
     ProductsListComponent
-  ],
-  entryComponents: [ProductFeedbackComponent]
+  ]
 })
 export class ProductsModule { }

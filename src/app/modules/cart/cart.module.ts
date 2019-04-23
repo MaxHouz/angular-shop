@@ -21,6 +21,9 @@ import { CartComponent } from './components/cart/cart.component';
     MaterialModule,
     SharedModule,
     CartRoutingModule
+  ],
+  entryComponents: [
+    CartModalComponent
   ]
 })
 export class CartModule { }

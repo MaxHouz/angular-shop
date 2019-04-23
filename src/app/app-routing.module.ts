@@ -9,6 +9,10 @@ const routes: Routes = [
     component: ContactUsComponent
   },
   {
+    path: 'admin',
+    loadChildren: './modules/admin/admin.module#AdminModule'
+  },
+  {
     path: '',
     redirectTo: '/products-list',
     pathMatch: 'full'

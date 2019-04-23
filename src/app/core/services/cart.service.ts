@@ -21,7 +21,7 @@ export class CartService {
   }
 
   isCartEmpty(): boolean {
-    return !!this.cartList.length;
+    return !this.cartList.length;
   }
 
   addProduct(product: Product): void {

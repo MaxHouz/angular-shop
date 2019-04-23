@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {CartService} from '../../../../core/services/cart.service';
-import {Product} from '../../../products/models/product.model';
+import { Router } from '@angular/router';
+
+import { Product } from '../../../products/models/product.model';
+import { CartService } from '../../../../core/services/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,6 +15,7 @@ export class CartComponent implements OnInit {
   selectedSorting: string;
 
   constructor(
+    private router: Router,
     private cartService: CartService
   ) { }
 
@@ -44,8 +47,7 @@ export class CartComponent implements OnInit {
   }
 
   order(): void {
-    alert(`Your order price is: $${this.getCartTotal()}`);
-    this.cartService.cleanCart();
+    this.router.navigate(['/order']);
   }
 
   getSortingOrder(): string {
