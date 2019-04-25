@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminComponent } from './components/admin/admin.component';
-import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
+import { AdminOrdersComponent } from './components/admin-orders-list/admin-orders.component';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
 import { AdminProductFormComponent } from './components/admin-product-form/admin-product-form.component';
+
+import { ProductResolveGuard } from './guards/product-resolve.guard';
 import { AdminActivationGuard } from './guards/admin-activation.guard';
 
 const routes: Routes = [
@@ -26,7 +28,10 @@ const routes: Routes = [
           },
           {
             path: 'products/edit/:id',
-            component: AdminProductFormComponent
+            component: AdminProductFormComponent,
+            resolve: {
+              productData: ProductResolveGuard
+            }
           }
         ]
       },

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ActivatedRoute } from '@angular/router';
+import { Product } from '../../../products/models/product.model';
+
 @Component({
   selector: 'app-admin-product-form',
   templateUrl: './admin-product-form.component.html',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminProductFormComponent implements OnInit {
 
-  constructor() { }
+  productData: Product;
+
+  constructor(
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+    this.productData = this.route.snapshot.data['productData'];
   }
-
 }

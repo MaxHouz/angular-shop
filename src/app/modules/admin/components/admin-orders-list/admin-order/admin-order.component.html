@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-title
+    class="product-title">
+    {{ order.id }}
+  </mat-card-title>
+  <mat-card-content class="info">
+    <div>
+      Items: {{ order.items | json }}
+    </div>
+    <div class="actions">
+      <button mat-raised-button
+              (click)="onDelete()"
+              color="warn">
+        Delete</button>
+    </div>
+  </mat-card-content>
+</mat-card>

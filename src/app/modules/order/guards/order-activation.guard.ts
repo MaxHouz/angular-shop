@@ -17,7 +17,7 @@ export class OrderActivationGuard implements CanActivate {
     if (!this.cartService.isCartEmpty()) {
       return true;
     } else {
-      this.router.navigate(['/product-list']);
+      this.router.navigate(['/products-list']);
     }
     return false;
   }

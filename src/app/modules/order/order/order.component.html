@@ -1,3 +1,7 @@
-<p>
-  order works!
-</p>
+<h3>Your order: </h3>
+<p>Items: {{ cartService.getCartList() | json }}</p>
+<p>Price: {{ cartService.getCartTotal() | currency: 'USD' }}</p>
+<button mat-raised-button
+        color="primary"
+        class="order-button"
+        (click)="onConfirmation()">Confirm order</button>

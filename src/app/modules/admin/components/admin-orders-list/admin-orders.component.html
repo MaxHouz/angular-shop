@@ -1,0 +1,5 @@
+<app-admin-order
+  *ngFor="let order of orders"
+  [order] = "order"
+  (delete)="onDelete($event)">
+</app-admin-order>

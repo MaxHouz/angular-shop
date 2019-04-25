@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ContactUsComponent } from './modules/contact-us/contact-us.component';
+import { AdminLoadGuard } from './modules/admin/guards/admin-load.guard';
 
 const routes: Routes = [
   {
@@ -10,7 +11,8 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: './modules/admin/admin.module#AdminModule'
+    loadChildren: './modules/admin/admin.module#AdminModule',
+    canLoad: [AdminLoadGuard],
   },
   {
     path: '',
