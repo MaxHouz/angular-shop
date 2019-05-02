@@ -1,0 +1,37 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Asus Zenbook",
+      "price": 1600,
+      "category": "Notebooks",
+      "description": "Ultra portable notebook",
+      "isAvailable": true
+    },
+    {
+      "id": 2,
+      "name": "iPhone Xs",
+      "price": 1200,
+      "category": "Phones",
+      "description": "Latest apple iPhone",
+      "isAvailable": false
+    },
+    {
+      "id": 3,
+      "name": "Galaxy Buds",
+      "price": 150,
+      "category": "Headphones",
+      "description": "Samsung wireless headphones",
+      "isAvailable": true
+    },
+    {
+      "id": 4,
+      "name": "MacBook silicon case",
+      "price": 200,
+      "category": "Accessories",
+      "description": "Silicon case for apple MacBook",
+      "isAvailable": true
+    }
+  ],
+  "orders": []
+}

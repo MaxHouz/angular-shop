@@ -5,6 +5,8 @@ import { ProductInfoComponent } from './components/product-info/product-info.com
 import { ProductsListComponent } from './components/products-list/products-list.component';
 import { ProductFeedbackComponent } from './components/product-feedback/product-feedback.component';
 
+import { ProductResolveGuard } from './guards/product-resolve.guard';
+
 const routes: Routes = [
   {
     path: 'products-list',
@@ -12,7 +14,10 @@ const routes: Routes = [
   },
   {
     path: 'product/:id',
-    component: ProductInfoComponent
+    component: ProductInfoComponent,
+    resolve: {
+      productData: ProductResolveGuard
+    }
   },
   {
     path: 'feedback',

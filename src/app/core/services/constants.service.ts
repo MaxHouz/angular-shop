@@ -6,5 +6,3 @@ export const CONSTANTS = {
   app: 'Angular2+ Shop',
   ver: '1.0'
 };
-
-// @Inject(ConstantsService) private constantsService: Object

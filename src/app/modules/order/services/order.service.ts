@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-
-import { LocalStorageService } from '../../../core/services/local-storage.service';
+import { HttpClient } from '@angular/common/http';
 
 import { Order } from '../models/order.models';
 
@@ -9,32 +8,35 @@ import { Order } from '../models/order.models';
 })
 export class OrderService {
 
+  private readonly ordersUrl = 'http://localhost:3001/orders';
+
   constructor(
-    private localStorageService: LocalStorageService
+    private http: HttpClient
   ) { }
 
-  getOrders(): Order[] {
-    return JSON.parse(this.localStorageService.getItem('orders'));
+  getOrders(): Promise<Order[]> {
+    return this.http.get<Order[]>(`${this.ordersUrl}`)
+      .toPromise()
+      .then(response => <Order[]>response)
+      .catch(this.handleError);
   }
 
-  addOrder(order: Order): void {
-    const orders = this.getOrders() || [];
-    orders.push(order);
-    this.updateLocalStorage(orders);
+  addOrder(order: Order): Promise<Order> {
+    return this.http.post<Order[]>(`${this.ordersUrl}`, order)
+      .toPromise()
+      .then(response => <Order[]>response)
+      .catch(this.handleError);
   }
 
-  deleteOrder(id: number): void {
-    const orders = this.getOrders() || [];
-    const i = orders.findIndex(o => o.id === id);
-
-    if (i > -1) {
-      orders.splice(i, 1);
-    }
-
-    this.updateLocalStorage(orders);
+  deleteOrder(id: number): Promise<Order> {
+    return this.http.delete<Order[]>(`${this.ordersUrl}/${id}`)
+      .toPromise()
+      .then(response => <Order[]>response)
+      .catch(this.handleError);
   }
 
-  private updateLocalStorage(orders: Order[]): void {
-    this.localStorageService.setItem('orders', JSON.stringify(orders));
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error);
+    return Promise.reject(error.message || error);
   }
 }

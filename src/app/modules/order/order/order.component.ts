@@ -19,24 +19,17 @@ export class OrderComponent implements OnInit {
     private orderService: OrderService
   ) { }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   onConfirmation(): void {
-    this.orderService.addOrder(this.formOrder());
+    this.orderService.addOrder({
+      items: this.cartService.getCartList(),
+      price: this.cartService.getCartTotal(),
+      address: 'Address',
+      date: Date.now(),
+      completed: false
+    } as Order);
     this.router.navigate(['/']);
     this.cartService.cleanCart();
-  }
-
-  private formOrder(): Order {
-    return new Order(
-      this.orderService.getOrders() ? this.orderService.getOrders().length + 1 : 1,
-      this.cartService.getCartList(),
-      this.cartService.getCartTotal(),
-      'Address',
-      Date.now(),
-      false
-    );
   }
 }
