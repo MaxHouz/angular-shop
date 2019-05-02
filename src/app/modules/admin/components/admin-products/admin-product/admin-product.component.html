@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-card-title
+    class="product-title"
+    (click)="navigateToProductInfo()">
+    {{ product.name }}
+  </mat-card-title>
+  <mat-card-subtitle>
+    ID: {{ product.id }}
+  </mat-card-subtitle>
+  <mat-card-subtitle>
+    {{ product.category | uppercase  }}
+  </mat-card-subtitle>
+  <mat-card-content class="info">
+    {{ product.description }}
+    <div class="price">
+      Price: {{ product.price | currency: 'USD'}}
+    </div>
+    <ng-container *ngIf="product.isAvailable; else notAvailable">
+      <span class="status status_available">Available</span>
+    </ng-container>
+    <ng-template #notAvailable class="unavailable">
+      <span class="status status_unavailable">Not Available</span>
+    </ng-template>
+    <div class="actions">
+      <div class="actions">
+        <button mat-raised-button
+                class="edit-button"
+                (click)="onEdit()"
+                color="primary">
+          Edit</button>
+      </div>
+      <button mat-raised-button
+              (click)="onDelete()"
+              color="warn">
+        Delete</button>
+    </div>
+  </mat-card-content>
+</mat-card>

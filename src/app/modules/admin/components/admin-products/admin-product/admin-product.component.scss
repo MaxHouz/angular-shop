@@ -1,0 +1,25 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 150px;
+  font-size: 18px;
+}
+.status {
+  &_available {
+    color: #0f8012;
+  }
+  &_unavailable {
+    color: #ff0907;
+  }
+}
+.edit-button {
+  margin-right: 20px;
+}
+.actions {
+  display: flex;
+}
+
+.product-title {
+  cursor: pointer;
+}

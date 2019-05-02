@@ -1,12 +1,32 @@
 <mat-toolbar color="primary" class="header">
-  <div class="header-menu">
-    <h1 class="app-title"
-        (click)="navigateHome()"
-        #appTitle></h1>
-    <span class="header-menu__item"
-          (click)="navigateToContacts()">
+  <h1 class="app-title"
+      (click)="navigateHome()"
+      #appTitle></h1>
+  <div>
+    <button
+      mat-button
+      class="header-item"
+      (click)="navigateToProductsList()">
+      Products
+    </button>
+    <button
+      mat-button
+      class="header-item"
+      (click)="navigateToCart()">
+      Cart
+    </button>
+    <button
+      mat-button
+      class="header-item"
+      (click)="navigateToContacts()">
       Contact us
-    </span>
+    </button>
+    <button
+      mat-button
+      class="header-item"
+      (click)="navigateToAdmin()">
+      Admin
+    </button>
   </div>
   <app-cart-button class="cart-icon"></app-cart-button>
 </mat-toolbar>

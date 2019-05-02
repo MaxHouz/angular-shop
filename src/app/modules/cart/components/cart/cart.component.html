@@ -1,0 +1,36 @@
+<section class="cart">
+  <mat-list *ngIf="!isCartEmpty(); else emptyCart">
+    <mat-form-field>
+      <mat-label>Sort by:</mat-label>
+      <mat-select [(value)]="selectedSorting">
+        <mat-option value="price">Price</mat-option>
+        <mat-option value="quantity">Quantity</mat-option>
+        <mat-option value="name">Name</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-checkbox class="cart__sort-select" [(ngModel)]="sortingOrder">
+      {{ getSortingOrder() }}
+    </mat-checkbox>
+    <app-cart-item
+      *ngFor="let product of getProductsFromCart() | orderBy:selectedSorting:sortingOrder"
+      [cartProduct]="product"
+      (deleteProduct)="onDeleteProduct($event)"
+      (increaseQuantity)="onIncreaseQuantity($event)"
+      (decreaseQuantity)="onDecreaseQuantity($event)">
+    </app-cart-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <p class="cart-total">Total: {{ getCartTotal() | currency: 'USD' }}</p>
+    </mat-list-item>
+    <button (click)="order()"
+            mat-stroked-button
+            color="primary">
+      Order
+    </button>
+  </mat-list>
+  <ng-template #emptyCart>
+    <p class="cart__empty">
+      Your cart is empty
+    </p>
+  </ng-template>
+</section>

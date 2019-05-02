@@ -13,3 +13,7 @@
 - Used async pipe in products-list component
 - Used uppercase pipe in products component
 - Used date and custom orderBy pipes in cart-modal component
+- Added routing for product-list, product, cart, order, admin
+- Implemented basic admin functionality
+- Added possibility to add and remove orders from localStorage
+- Added guards for cart, admin, admin-product-form components

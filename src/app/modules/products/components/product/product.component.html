@@ -1,5 +1,7 @@
 <mat-card>
-  <mat-card-title>
+  <mat-card-title
+    class="product-title"
+    (click)="navigateToProductInfo()">
     {{ product.name }}
   </mat-card-title>
   <mat-card-subtitle>
@@ -7,9 +9,9 @@
   </mat-card-subtitle>
   <mat-card-content class="info">
     {{ product.description }}
-      <div class="price">
-        Price: {{ product.price | currency: 'USD'}}
-      </div>
+    <div class="price">
+      Price: {{ product.price | currency: 'USD'}}
+    </div>
     <ng-container *ngIf="product.isAvailable; else notAvailable">
       <span class="status status_available">Available</span>
     </ng-container>
@@ -21,14 +23,12 @@
               color="primary"
               class="order-button"
               [disabled]="!product.isAvailable"
-              (click)="onBuy()"
-      >Buy</button>
+              (click)="onBuy()">Buy</button>
       <button mat-stroked-button
               color="accent"
               class="order-button"
               [disabled]="!product.isAvailable"
-              (click)="onAddToCart()"
-      >Add to cart</button>
+              (click)="onAddToCart()">Add to cart</button>
     </div>
   </mat-card-content>
 </mat-card>

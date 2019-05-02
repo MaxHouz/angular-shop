@@ -5,8 +5,10 @@ import {
   OnInit,
   Output
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Product } from '../../models/product.model';
+
 
 @Component({
   selector: 'app-product',
@@ -18,7 +20,9 @@ export class ProductComponent implements OnInit {
   @Output() addToCard = new EventEmitter<Product>();
   @Output() buy = new EventEmitter<Product>();
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
@@ -29,5 +33,9 @@ export class ProductComponent implements OnInit {
 
   onAddToCart(): void {
     this.addToCard.emit(this.product);
+  }
+
+  navigateToProductInfo(): void {
+    this.router.navigate(['/product', this.product.id]);
   }
 }
