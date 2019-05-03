@@ -6,31 +6,37 @@ import { LocalStorageService } from './local-storage.service';
 
 import { AppSettings } from '../models/app-setting.model';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class AppSettingsService {
+  private appSettings: AppSettings;
+
   constructor(
     private http: HttpClient,
     private localStorageService: LocalStorageService
   ) { }
 
   initializeSettings() {
-    let appSettings;
-
-    if (this.getSettingsFromLocalStorage() !== null) {
-      appSettings = this.getSettingsFromLocalStorage();
+    if (!!this.getSettingsFromLocalStorage()) {
+      this.appSettings = this.getSettingsFromLocalStorage();
     } else {
       this.getLocalSettings().subscribe(
         (settings) => {
-          appSettings = settings;
+          this.appSettings = settings;
           this.saveSettingToLocalStorage(settings);
+          console.log(this.appSettings);
         },
-        () => appSettings = this.getDefaultSetting()
+        () => {
+          this.appSettings = this.getDefaultSetting();
+          console.log(this.appSettings);
+        }
       );
     }
-    return appSettings;
+  }
+
+  getAppSettings(): AppSettings {
+    return this.appSettings;
   }
 
   private getSettingsFromLocalStorage(): AppSettings {
