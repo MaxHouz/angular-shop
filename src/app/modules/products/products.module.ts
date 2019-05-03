@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 
 import { MaterialModule } from '../../core/material/material.module';
 import { ProductsRoutingModule } from './products-routing.module';
@@ -21,7 +20,6 @@ import { ProductFeedbackComponent } from './components/product-feedback/product-
   imports: [
     CommonModule,
     MaterialModule,
-    HttpClientModule,
     ProductsRoutingModule
   ],
   exports: [
