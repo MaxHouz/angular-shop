@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 import { LocalStorageService } from './local-storage.service';
 
@@ -17,19 +16,17 @@ export class AppSettingsService {
     private localStorageService: LocalStorageService
   ) { }
 
-  initializeSettings() {
+  initializeSettings(): Promise<any> {
     if (!!this.getSettingsFromLocalStorage()) {
-      this.appSettings = this.getSettingsFromLocalStorage();
+      return Promise.resolve(this.getSettingsFromLocalStorage())
+        .then(settings => this.appSettings = settings);
     } else {
-      this.getLocalSettings().subscribe(
-        (settings) => {
+      return this.getLocalSettings()
+        .then(settings => {
           this.appSettings = settings;
           this.saveSettingToLocalStorage(settings);
-        },
-        () => {
-          this.appSettings = this.getDefaultSetting();
-        }
-      );
+        })
+        .catch(() => this.appSettings = this.getDefaultSetting());
     }
   }
 
@@ -45,8 +42,9 @@ export class AppSettingsService {
     this.localStorageService.setItem('app-settings', JSON.stringify(settings));
   }
 
-  private getLocalSettings(): Observable<AppSettings> {
-    return this.http.get<AppSettings>('./assets/app-settings.json');
+  private getLocalSettings(): Promise<AppSettings> {
+    return this.http.get<AppSettings>('./assets/app-settings.json')
+      .toPromise();
   }
 
   private getDefaultSetting(): AppSettings {
