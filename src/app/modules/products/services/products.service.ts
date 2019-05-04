@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Product } from '../models/product.model';
 
 import { Observable } from 'rxjs';
+
+import { Product } from '../models/product.model';
+import { AppSettingsService } from '../../../core/services/app-settings.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-  private readonly productsUrl = 'http://localhost:3001/products';
+  private readonly productsUrl = `${this.appSettingsService.getAppSettings().environment}products`;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private appSettingsService: AppSettingsService
   ) { }
 
   getProducts(): Observable<Product[]> {

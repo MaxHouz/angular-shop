@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { OrderComponent } from './order/order.component';
+import { OrderComponent } from './components/order/order.component';
 import { OrderActivationGuard } from './guards/order-activation.guard';
 
 const routes: Routes = [

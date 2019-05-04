@@ -3,15 +3,18 @@ import { HttpClient } from '@angular/common/http';
 
 import { Order } from '../models/order.models';
 
+import { AppSettingsService } from '../../../core/services/app-settings.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
 
-  private readonly ordersUrl = 'http://localhost:3001/orders';
+  private readonly ordersUrl = `${this.appSettingsService.getAppSettings().environment}orders`;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private appSettingsService: AppSettingsService
   ) { }
 
   getOrders(): Promise<Order[]> {

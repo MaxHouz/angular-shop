@@ -25,11 +25,9 @@ export class AppSettingsService {
         (settings) => {
           this.appSettings = settings;
           this.saveSettingToLocalStorage(settings);
-          console.log(this.appSettings);
         },
         () => {
           this.appSettings = this.getDefaultSetting();
-          console.log(this.appSettings);
         }
       );
     }
@@ -53,10 +51,10 @@ export class AppSettingsService {
 
   private getDefaultSetting(): AppSettings {
     return {
-      name: 'Angular Shop',
+      title: 'Default title',
       version: '1.0.0',
       author: 'default',
-      environment: 'default'
+      environment: 'http://localhost:3001/'
     };
   }
 }

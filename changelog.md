@@ -17,3 +17,7 @@
 - Implemented basic admin functionality
 - Added possibility to add and remove orders from localStorage
 - Added guards for cart, admin, admin-product-form components
+- Added mock back-end with json-server
+- Implemented RESTful api using HttpClient using Observables and Promises
+- Implemented Timing interceptor to log time sor products request
+- Added service to provide app settings

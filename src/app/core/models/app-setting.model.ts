@@ -1,5 +1,5 @@
 export interface AppSettings {
-  name: string;
+  title: string;
   version: string;
   author: string;
   environment: string;

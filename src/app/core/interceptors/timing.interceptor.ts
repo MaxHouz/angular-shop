@@ -14,9 +14,9 @@ export class TimingInterceptor implements HttpInterceptor {
         if (event instanceof HttpResponse) {
           if (event.url.includes('products')) {
             console.log(`Products request took ${performance.now() - start} ms`);
-            return event;
           }
         }
+        return event;
       })
     );
   }
