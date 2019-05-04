@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AppSettingsService } from './core/services/app-settings.service';
+import { Store } from '@ngrx/store';
+import { AppState } from './core/store/app.state';
+import { LoadCartFromLocalStorage } from './core/store/cart/cart.actions';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +11,9 @@ import { AppSettingsService } from './core/services/app-settings.service';
 export class AppComponent implements OnInit {
 
   constructor(
-    private appSettingsService: AppSettingsService
+    private store: Store<AppState>,
   ) {}
   ngOnInit(): void {
-    this.appSettingsService.initializeSettings();
+    this.store.dispatch(new LoadCartFromLocalStorage());
   }
 }

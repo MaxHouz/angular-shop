@@ -1,4 +1,4 @@
-<mat-list *ngIf="!isCartEmpty(); else emptyCart">
+<mat-list *ngIf="!(cartState$ | async).empty; else emptyCart">
   <span>Last updated: {{ lastUpdated | date:'HH:mm:ss' }}</span>
   <mat-form-field class="sort-select">
     <mat-label>Sort by:</mat-label>
@@ -20,7 +20,7 @@
   </app-cart-item>
   <mat-divider></mat-divider>
   <mat-list-item>
-    <p class="cart-total">Total: {{ getCartTotal() | currency: 'USD' }}</p>
+    <p class="cart-total">Total: {{ (cartState$ | async).cost | currency: 'USD' }}</p>
     <button (click)="order()"
             mat-stroked-button
             color="primary">

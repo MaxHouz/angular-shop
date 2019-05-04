@@ -61,12 +61,12 @@
           "category": "Notebooks",
           "description": "Ultra portable notebook",
           "isAvailable": true,
-          "quantity": 1
+          "quantity": 2
         }
       ],
-      "price": 1600,
+      "price": 3200,
       "address": "Address",
-      "date": 1556964088039,
+      "date": 1556974482564,
       "completed": false,
       "id": 2
     }

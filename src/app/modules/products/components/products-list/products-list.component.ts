@@ -3,9 +3,13 @@ import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../core/store/app.state';
+import { AddProductToCart } from '../../../../core/store/cart/cart.actions';
+
 import { Product } from '../../models/product.model';
 
-import { CartService } from '../../../../core/services/cart.service';
+import { CartService } from '../../../cart/services/cart.service';
 import { ProductsService } from '../../services/products.service';
 
 @Component({
@@ -17,6 +21,7 @@ export class ProductsListComponent implements OnInit {
   public productsList: Observable<Product[]>;
 
   constructor(
+    private store: Store<AppState>,
     private router: Router,
     private cartService: CartService,
     private productsService: ProductsService
@@ -32,6 +37,6 @@ export class ProductsListComponent implements OnInit {
   }
 
   onAddToCart(product: Product): void {
-    this.cartService.addProduct(product);
+    this.store.dispatch(new AddProductToCart(product));
   }
 }

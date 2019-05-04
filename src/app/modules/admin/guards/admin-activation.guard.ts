@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+
 import { Observable } from 'rxjs';
 
-import { CartService } from '../../../core/services/cart.service';
+import { AppSettingsService } from '../../../core/services/app-settings.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +11,12 @@ import { CartService } from '../../../core/services/cart.service';
 export class AdminActivationGuard implements CanActivate {
   constructor(
     private router: Router,
-    private cartService: CartService
+    private appSettingsService: AppSettingsService
   ) {}
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.cartService.getCartLength() === 3) {
+    if (this.appSettingsService.getAppSettings().mode === 'admin') {
       return true;
     } else {
       this.router.navigate(['/']);

@@ -1,8 +1,11 @@
 import { OnInit, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../core/store/app.state';
+
 import { Product } from '../../models/product.model';
-import { CartService } from '../../../../core/services/cart.service';
+import {AddProductToCart} from '../../../../core/store/cart/cart.actions';
 
 @Component({
   selector: 'app-product-info',
@@ -13,9 +16,9 @@ export class ProductInfoComponent implements OnInit {
   product: Product;
 
   constructor(
+    private store: Store<AppState>,
     private route: ActivatedRoute,
     private router: Router,
-    private cartService: CartService,
   ) { }
 
   ngOnInit() {
@@ -28,7 +31,7 @@ export class ProductInfoComponent implements OnInit {
   }
 
   addToCart(): void {
-    this.cartService.addProduct(this.product);
+    this.store.dispatch(new AddProductToCart(this.product));
   }
 
   showFeedback(): void {

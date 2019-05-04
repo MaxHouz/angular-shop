@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '../../../core/services/cart.service';
+
+import { Observable } from 'rxjs';
+
+import { select, Store } from '@ngrx/store';
+import { AppState } from '../../../core/store/app.state';
+import { CartState } from '../../../core/store/cart/cart.state';
+
 import { MatBottomSheet } from '@angular/material';
 import { CartModalComponent } from '../../../modules/cart/components/cart-modal/cart-modal.component';
 
@@ -9,15 +15,16 @@ import { CartModalComponent } from '../../../modules/cart/components/cart-modal/
   styleUrls: ['./cart-button.component.scss']
 })
 export class CartButtonComponent implements OnInit {
+
+  cartState$: Observable<CartState>;
+
   constructor(
-    private cartService: CartService,
+    private store: Store<AppState>,
     private matBottomSheet: MatBottomSheet
   ) { }
 
-  ngOnInit() {}
-
-  getProductsCount(): number {
-    return this.cartService.getCartLength();
+  ngOnInit() {
+    this.cartState$ = this.store.pipe(select('cart'));
   }
 
   openCartModal(): void {

@@ -3,4 +3,5 @@ export interface AppSettings {
   version: string;
   author: string;
   environment: string;
+  mode: 'admin' | 'user';
 }

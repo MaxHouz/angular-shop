@@ -1,12 +1,22 @@
 import {
   OnInit,
   Component,
-  ChangeDetectionStrategy, DoCheck,
+  ChangeDetectionStrategy, DoCheck, OnDestroy,
 } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { Observable, Subscription } from 'rxjs';
+
+import { select, Store } from '@ngrx/store';
+import { AppState } from '../../../../core/store/app.state';
+import { CartState } from '../../../../core/store/cart/cart.state';
+import {
+  RemoveProductFromCart,
+  DecreaseProductQuantity,
+  IncreaseProductQuantity
+} from '../../../../core/store/cart/cart.actions';
+
 import { Product } from '../../../products/models/product.model';
-import { CartService } from '../../../../core/services/cart.service';
 
 @Component({
   selector: 'app-cart-modal',
@@ -14,46 +24,51 @@ import { CartService } from '../../../../core/services/cart.service';
   styleUrls: ['./cart-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CartModalComponent implements OnInit, DoCheck {
+export class CartModalComponent implements OnInit, DoCheck, OnDestroy {
 
+  cartState$: Observable<CartState>;
+  cartProducts: Product[];
   lastUpdated: number;
   sortingOrder: boolean;
   selectedSorting: string;
 
+  private sub: Subscription;
+
   constructor(
-    private router: Router,
-    private cartService: CartService
+    private store: Store<AppState>,
+    private router: Router
   ) { }
 
   ngOnInit() {
+    this.cartState$ = this.store.pipe(select('cart'));
+
+    this.sub = this.cartState$.subscribe(
+      cartState => this.cartProducts = cartState.products
+    );
   }
 
-  ngDoCheck(): void {
+  ngDoCheck() {
     this.lastUpdated = Date.now();
   }
 
-  getProductsFromCart(): Product[] {
-    return this.cartService.getCartList();
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
-  getCartTotal(): number {
-    return this.cartService.getCartTotal();
+  getProductsFromCart(): Product[] {
+    return this.cartProducts;
   }
 
   onDeleteProduct(product: Product): void {
-    this.cartService.deleteProduct(product);
+    this.store.dispatch(new RemoveProductFromCart(product));
   }
 
-  onIncreaseQuantity(id: number): void {
-    this.cartService.increaseQuantity(id);
+  onIncreaseQuantity(product: Product): void {
+    this.store.dispatch(new IncreaseProductQuantity(product));
   }
 
-  onDecreaseQuantity(id: number): void {
-    this.cartService.decreaseQuantity(id);
-  }
-
-  isCartEmpty(): boolean {
-    return this.cartService.isCartEmpty();
+  onDecreaseQuantity(product: Product): void {
+    this.store.dispatch(new DecreaseProductQuantity(product));
   }
 
   order(): void {
