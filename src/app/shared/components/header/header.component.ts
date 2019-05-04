@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { AppSettingsService } from '../../../core/services/app-settings.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -17,7 +19,8 @@ export class HeaderComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @ViewChild('appTitle') appTitle: ElementRef;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private appSettingsService: AppSettingsService
   ) {}
 
   ngOnInit() {
@@ -25,7 +28,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, AfterViewChecked 
   }
 
   ngAfterViewInit() {
-    this.appTitle.nativeElement.innerHTML = 'Angular2+ Shop';
+    this.appTitle.nativeElement.innerHTML = this.appSettingsService.getAppSettings().title;
   }
 
   ngAfterViewChecked() {

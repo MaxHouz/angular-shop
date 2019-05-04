@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../core/material/material.module';
 
 import { OrderRoutingModule } from './order-routing.module';
-import { OrderComponent } from './order/order.component';
+
+import { OrderComponent } from './components/order/order.component';
 
 @NgModule({
   declarations: [

@@ -6,7 +6,7 @@ import { AdminOrdersComponent } from './components/admin-orders-list/admin-order
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
 import { AdminProductFormComponent } from './components/admin-product-form/admin-product-form.component';
 
-import { ProductResolveGuard } from './guards/product-resolve.guard';
+import { ProductResolveGuard } from '../products/guards/product-resolve.guard';
 import { AdminActivationGuard } from './guards/admin-activation.guard';
 
 const routes: Routes = [

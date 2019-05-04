@@ -1,11 +1,8 @@
 import { OnInit, Component } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-
-import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Product } from '../../models/product.model';
 import { CartService } from '../../../../core/services/cart.service';
-import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-product-info',
@@ -19,15 +16,10 @@ export class ProductInfoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private cartService: CartService,
-    private productsService: ProductsService,
   ) { }
 
   ngOnInit() {
-    this.route.paramMap.pipe(
-      switchMap((params: Params) => this.productsService.getProduct(+params.get('id')))
-    ).subscribe(
-      product => this.product = product
-    );
+    this.product = this.route.snapshot.data['productData'];
   }
 
   buy(): void {

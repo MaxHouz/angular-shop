@@ -1,73 +1,36 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../models/product.model';
-import { Categories } from '../models/categories.enum';
+import { HttpClient } from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
+import { Product } from '../models/product.model';
+import { AppSettingsService } from '../../../core/services/app-settings.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
-  private productsList: Product[] = [
-    new Product(
-      1,
-      'Asus Zenbook',
-      1600,
-      Categories.notebooks,
-      'Ultra portable notebook',
-      true
-    ),
-    new Product(
-      2,
-      'iPhone Xs',
-      1200,
-      Categories.phones,
-      'Latest apple iPhone',
-      true
-    ),
-    new Product(
-      3,
-      'Galaxy Buds',
-      150,
-      Categories.headphones,
-      'Samsung wireless headphones',
-      true
-    ),
-    new Product(
-      4,
-      'MacBook silicon case',
-      200,
-      Categories.accessories,
-      'Silicon case for apple MacBook',
-      true
-    )
-  ];
-  constructor() { }
+
+  private readonly productsUrl = `${this.appSettingsService.getAppSettings().environment}products`;
+
+  constructor(
+    private http: HttpClient,
+    private appSettingsService: AppSettingsService
+  ) { }
 
   getProducts(): Observable<Product[]> {
-    return of(this.productsList);
+    return this.http.get<Product[]>(`${this.productsUrl}`);
   }
 
   getProduct(id: number | string): Observable<Product> {
-    return this.getProducts().pipe(
-      map((products: Product[]) => products.find(product => product.id === +id))
-    );
+    return this.http.get<Product>(`${this.productsUrl}/${id}`);
   }
 
-  updateProduct(product: Product): void {
-    const i = this.productsList.findIndex(p => p.id === product.id);
-
-    if (i > -1) {
-      this.productsList.splice(i, 1, product);
-    }
+  updateProduct(product: Product): Observable<Product> {
+    return this.http.put<Product>(`${this.productsUrl}/${product.id}`, product);
   }
 
-  deleteProduct(id: number): void {
-    const i = this.productsList.findIndex(p => p.id === id);
-
-    if (i > -1) {
-      this.productsList.splice(i, 1);
-    }
+  deleteProduct(id: number): Observable<Product> {
+    return this.http.delete<Product>(`${this.productsUrl}/${id}`);
   }
 }

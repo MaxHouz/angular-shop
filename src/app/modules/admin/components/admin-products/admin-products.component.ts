@@ -30,6 +30,7 @@ export class AdminProductsComponent implements OnInit {
   }
 
   onDelete(product: Product): void {
-    this.productsService.deleteProduct(product.id);
+    this.productsService.deleteProduct(product.id).subscribe(
+      () => this.productsList = this.productsService.getProducts());
   }
 }

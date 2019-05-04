@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 
@@ -12,6 +13,8 @@ import { SharedModule } from './shared/shared.module';
 import { ProductsModule } from './modules/products/products.module';
 import { AppRoutingModule } from './app-routing.module';
 import { ContactUsComponent } from './modules/contact-us/contact-us.component';
+import { TimingInterceptor } from './core/interceptors/timing.interceptor';
+
 
 
 @NgModule({
@@ -21,6 +24,7 @@ import { ContactUsComponent } from './modules/contact-us/contact-us.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     CoreModule,
     SharedModule,
@@ -30,7 +34,13 @@ import { ContactUsComponent } from './modules/contact-us/contact-us.component';
     ProductsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TimingInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

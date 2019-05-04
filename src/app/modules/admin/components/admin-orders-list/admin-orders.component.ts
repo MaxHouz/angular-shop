@@ -11,7 +11,7 @@ import { OrderService } from '../../../order/services/order.service';
 })
 export class AdminOrdersComponent implements OnInit {
 
-  orders: Order[];
+  orders: Promise<Order[]>;
 
   constructor(
     private orderService: OrderService
@@ -22,7 +22,7 @@ export class AdminOrdersComponent implements OnInit {
   }
 
   onDelete(order: Order): void {
-    this.orderService.deleteOrder(order.id);
-    this.orders = this.orderService.getOrders();
+    this.orderService.deleteOrder(order.id)
+      .then(() => this.orders = this.orderService.getOrders());
   }
 }

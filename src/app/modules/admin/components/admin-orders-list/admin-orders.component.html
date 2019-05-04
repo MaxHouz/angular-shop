@@ -1,5 +1,5 @@
 <app-admin-order
-  *ngFor="let order of orders"
+  *ngFor="let order of orders | async"
   [order] = "order"
   (delete)="onDelete($event)">
 </app-admin-order>
