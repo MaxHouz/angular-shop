@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../core/store/app.state';
 import { AddProductToCart } from '../../../../core/store/cart/cart.actions';
+import * as RouterActions from '../../../../core/store/router/router.actions';
 
 import { Product } from '../../models/product.model';
 
@@ -22,7 +22,6 @@ export class ProductsListComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private router: Router,
     private cartService: CartService,
     private productsService: ProductsService
   ) {}
@@ -33,7 +32,9 @@ export class ProductsListComponent implements OnInit {
 
   onBuy(product: Product): void {
     this.onAddToCart(product);
-    this.router.navigate(['/order']);
+    this.store.dispatch(new RouterActions.Go({
+      path: ['/order']
+    }));
   }
 
   onAddToCart(product: Product): void {

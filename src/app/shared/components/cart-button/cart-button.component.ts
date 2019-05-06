@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../../../core/store/app.state';
-import { CartState } from '../../../core/store/cart/cart.state';
+import { getCartSize } from '../../../core/store/cart/cart.selectors';
 
 import { MatBottomSheet } from '@angular/material';
 import { CartModalComponent } from '../../../modules/cart/components/cart-modal/cart-modal.component';
@@ -16,7 +16,7 @@ import { CartModalComponent } from '../../../modules/cart/components/cart-modal/
 })
 export class CartButtonComponent implements OnInit {
 
-  cartState$: Observable<CartState>;
+  cartSize$: Observable<number>;
 
   constructor(
     private store: Store<AppState>,
@@ -24,7 +24,7 @@ export class CartButtonComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cartState$ = this.store.pipe(select('cart'));
+    this.cartSize$ = this.store.pipe(select(getCartSize));
   }
 
   openCartModal(): void {

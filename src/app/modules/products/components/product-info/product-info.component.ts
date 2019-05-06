@@ -1,11 +1,12 @@
 import { OnInit, Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../core/store/app.state';
+import * as RouterActions from '../../../../core/store/router/router.actions';
 
 import { Product } from '../../models/product.model';
-import {AddProductToCart} from '../../../../core/store/cart/cart.actions';
+import { AddProductToCart } from '../../../../core/store/cart/cart.actions';
 
 @Component({
   selector: 'app-product-info',
@@ -17,8 +18,7 @@ export class ProductInfoComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private route: ActivatedRoute,
-    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -27,7 +27,9 @@ export class ProductInfoComponent implements OnInit {
 
   buy(): void {
     this.addToCart();
-    this.router.navigate(['/order']);
+    this.store.dispatch(new RouterActions.Go({
+      path: ['/order']
+    }));
   }
 
   addToCart(): void {
@@ -35,6 +37,8 @@ export class ProductInfoComponent implements OnInit {
   }
 
   showFeedback(): void {
-    this.router.navigate([{outlets: { feedback: ['feedback'] }}]);
+    this.store.dispatch(new RouterActions.Go({
+      path: [{outlets: { feedback: ['feedback'] }}]
+    }));
   }
 }

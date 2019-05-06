@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
 
 import { Observable, Subscription } from 'rxjs';
 
@@ -7,10 +6,12 @@ import { select, Store } from '@ngrx/store';
 import { AppState } from '../../../../core/store/app.state';
 import { CartState } from '../../../../core/store/cart/cart.state';
 import { CleanCart } from '../../../../core/store/cart/cart.actions';
+import { getCartState } from '../../../../core/store/cart/cart.selectors';
 
 import { Order } from '../../models/order.models';
 import { Product } from '../../../products/models/product.model';
 import { OrderService } from '../../services/order.service';
+import * as RouterActions from '../../../../core/store/router/router.actions';
 
 @Component({
   selector: 'app-order',
@@ -27,12 +28,11 @@ export class OrderComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<AppState>,
-    private router: Router,
     private orderService: OrderService
   ) { }
 
   ngOnInit() {
-    this.cartState$ = this.store.pipe(select('cart'));
+    this.cartState$ = this.store.pipe(select(getCartState));
 
     this.sub = this.cartState$.subscribe(
       cartState => {
@@ -54,7 +54,9 @@ export class OrderComponent implements OnInit, OnDestroy {
       date: Date.now(),
       completed: false
     } as Order);
-    this.router.navigate(['/']);
+    this.store.dispatch(new RouterActions.Go({
+      path: ['/']
+    }));
     this.store.dispatch(new CleanCart());
   }
 }

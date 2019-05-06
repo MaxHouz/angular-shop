@@ -1,9 +1,12 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { Injectable, OnDestroy } from '@angular/core';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+
 import { Observable, Subscription } from 'rxjs';
+
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../../../core/store/app.state';
 import { CartState } from '../../../core/store/cart/cart.state';
+import * as RouterActions from '../../../core/store/router/router.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +16,7 @@ export class OrderActivationGuard implements CanActivate, OnDestroy {
   private sub: Subscription;
 
   constructor(
-    private store: Store<AppState>,
-    private router: Router
+    private store: Store<AppState>
   ) {
     this.sub = this.store.pipe(select('cart'))
       .subscribe( (cartState: CartState) => this.cartEmpty = cartState.empty);
@@ -30,7 +32,9 @@ export class OrderActivationGuard implements CanActivate, OnDestroy {
     if (!this.cartEmpty) {
       return true;
     } else {
-      this.router.navigate(['/products-list']);
+      this.store.dispatch(new RouterActions.Go({
+        path: ['/products-list']
+      }));
     }
     return false;
   }

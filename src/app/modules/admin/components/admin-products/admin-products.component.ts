@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../core/store/app.state';
+import * as RouterActions from '../../../../core/store/router/router.actions';
 
 import { Product } from '../../../products/models/product.model';
 import { ProductsService } from '../../../products/services/products.service';
@@ -17,7 +20,7 @@ export class AdminProductsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
+    private store: Store<AppState>,
     private productsService: ProductsService
   ) { }
 
@@ -26,7 +29,10 @@ export class AdminProductsComponent implements OnInit {
   }
 
   onEdit(product: Product): void {
-    this.router.navigate(['./edit', product.id], { relativeTo: this.route });
+    this.store.dispatch(new RouterActions.Go({
+      path: ['./edit', product.id],
+      extras: { relativeTo: this.route }
+    }));
   }
 
   onDelete(product: Product): void {

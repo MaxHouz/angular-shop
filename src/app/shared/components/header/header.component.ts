@@ -6,7 +6,10 @@ import {
   AfterViewInit,
   AfterViewChecked
 } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../core/store/app.state';
+import * as RouterActions from '../../../core/store/router/router.actions';
 
 import { AppSettingsService } from '../../../core/services/app-settings.service';
 
@@ -19,7 +22,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, AfterViewChecked 
   @ViewChild('appTitle') appTitle: ElementRef;
 
   constructor(
-    private router: Router,
+    private store: Store<AppState>,
     private appSettingsService: AppSettingsService
   ) {}
 
@@ -36,21 +39,31 @@ export class HeaderComponent implements OnInit, AfterViewInit, AfterViewChecked 
   }
 
   navigateHome(): void {
-    this.router.navigate(['/']);
+    this.store.dispatch(new RouterActions.Go({
+      path: ['/']
+    }));
   }
 
   navigateToCart(): void {
-    this.router.navigate(['/cart']);
+    this.store.dispatch(new RouterActions.Go({
+      path: ['/cart']
+    }));
   }
 
   navigateToAdmin(): void {
-    this.router.navigate(['/admin']);
+    this.store.dispatch(new RouterActions.Go({
+      path: ['/admin']
+    }));
   }
 
   navigateToContacts(): void {
-    this.router.navigate(['/contact-us']);
+    this.store.dispatch(new RouterActions.Go({
+      path: ['/contact-us']
+    }));
   }
   navigateToProductsList(): void {
-    this.router.navigate(['/products-list']);
+    this.store.dispatch(new RouterActions.Go({
+      path: ['/products-list']
+    }));
   }
 }

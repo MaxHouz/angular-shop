@@ -21,3 +21,6 @@
 - Implemented RESTful api using HttpClient using Observables and Promises
 - Implemented Timing interceptor to log time sor products request
 - Added service to provide app settings
+- Added NgRx store for Cart(actions, reducer, feature/state selectors)
+- Added cart synchronization with local storage with NgRx effects
+- Implemented navigation with @ngrx/router-store
