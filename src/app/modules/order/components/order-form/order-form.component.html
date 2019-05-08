@@ -1,0 +1,88 @@
+<form (ngSubmit)="confirmOrder()" [formGroup]="orderForm" class="order-form">
+  <mat-vertical-stepper [linear]="true">
+    <mat-step [stepControl]="nameFormGroup" formGroupName="name">
+      <ng-template matStepLabel>Name</ng-template>
+      <div class="vertical">
+        <mat-form-field>
+          <input matInput placeholder="First name" formControlName="firstName">
+          <mat-error *ngIf="nameFormGroup.invalid">
+            Error
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Last name" formControlName="lastName">
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="contactsFormGroup" formGroupName="contacts" class="vertical">
+      <ng-template matStepLabel>Contacts</ng-template>
+      <div class="vertical">
+        <mat-form-field>
+          <input matInput placeholder="E-mail" formControlName="email">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Phone" formControlName="phones">
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="shippingFormGroup" formGroupName="shipping">
+      <ng-template matStepLabel>Shipping</ng-template>
+      <mat-card>
+        <mat-slide-toggle
+          (click)="enableShipping()"
+          class="example-margin"
+          color="primary"
+          formControlName="shipping">
+          Need Shipping
+        </mat-slide-toggle>
+        <mat-expansion-panel [disabled]="false" class="shipping-details">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Shipping details
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="vertical">
+            <mat-form-field>
+              <mat-label>City</mat-label>
+              <mat-select formControlName="city">
+                <mat-option value="Kyiv">Kyiv</mat-option>
+                <mat-option value="Lviv">Lviv</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Address" formControlName="address">
+            </mat-form-field>
+            <mat-checkbox formControlName="sameAsOrderDetails" (click)="setShippingDetails()">
+              Same as order details
+            </mat-checkbox>
+            <mat-form-field>
+              <input matInput placeholder="First name" formControlName="shippingFirstName">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Last name" formControlName="shippingLastName">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="E-mail" formControlName="shippingEmail">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Phone" formControlName="shippingPhones">
+            </mat-form-field>
+          </div>
+        </mat-expansion-panel>
+      </mat-card>
+      <button mat-button matStepperPrevious class="order-button">Back</button>
+      <button mat-raised-button
+              type="submit"
+              color="primary"
+              [disabled]="orderForm.invalid"
+              class="order-button">Confirm order</button>
+    </mat-step>
+  </mat-vertical-stepper>
+</form>

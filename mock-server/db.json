@@ -69,6 +69,24 @@
       "date": 1556974482564,
       "completed": false,
       "id": 2
+    },
+    {
+      "items": [
+        {
+          "id": 1,
+          "name": "Asus Zenbook",
+          "price": 1600,
+          "category": "Notebooks",
+          "description": "Ultra portable notebook",
+          "isAvailable": true,
+          "quantity": 4
+        }
+      ],
+      "price": 1600,
+      "address": "Address",
+      "date": 1557322825767,
+      "completed": false,
+      "id": 3
     }
   ]
 }

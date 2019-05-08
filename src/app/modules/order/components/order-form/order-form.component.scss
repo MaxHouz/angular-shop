@@ -1,0 +1,17 @@
+.vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-form {
+  width: 40%;
+}
+
+.shipping-details {
+  margin-top: 20px;
+}
+
+.order-button {
+  margin-top: 20px;
+  display: block;
+}
