@@ -1,12 +1,25 @@
 import {
   OnInit,
+  DoCheck,
   Component,
-  ChangeDetectionStrategy, DoCheck,
+  OnDestroy,
+  ChangeDetectionStrategy
 } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { Observable, Subscription } from 'rxjs';
+
+import { select, Store } from '@ngrx/store';
+import { AppState } from '../../../../core/store/app.state';
+import * as CartSelectors from '../../../../core/store/cart/cart.selectors';
+
+import {
+  RemoveProductFromCart,
+  DecreaseProductQuantity,
+  IncreaseProductQuantity
+} from '../../../../core/store/cart/cart.actions';
 
 import { Product } from '../../../products/models/product.model';
-import { CartService } from '../../../../core/services/cart.service';
+import * as RouterActions from '../../../../core/store/router/router.actions';
 
 @Component({
   selector: 'app-cart-modal',
@@ -14,50 +27,61 @@ import { CartService } from '../../../../core/services/cart.service';
   styleUrls: ['./cart-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CartModalComponent implements OnInit, DoCheck {
+export class CartModalComponent implements OnInit, DoCheck, OnDestroy {
 
+  cartCost$: Observable<number>;
+  cartEmpty$: Observable<boolean>;
+  cartProducts$: Observable<Product[]>;
+
+  cartProducts: Product[];
   lastUpdated: number;
   sortingOrder: boolean;
   selectedSorting: string;
 
+  private sub: Subscription;
+
   constructor(
-    private router: Router,
-    private cartService: CartService
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
+    this.cartCost$ = this.store.pipe(select(CartSelectors.getCartCost));
+    this.cartEmpty$ = this.store.pipe(select(CartSelectors.getCartEmpty));
+    this.cartProducts$ = this.store.pipe(select(CartSelectors.getCartProducts));
+
+    this.sub = this.cartProducts$.subscribe(
+      productsList => this.cartProducts = productsList
+    );
   }
 
-  ngDoCheck(): void {
+  ngDoCheck() {
     this.lastUpdated = Date.now();
   }
 
-  getProductsFromCart(): Product[] {
-    return this.cartService.getCartList();
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
-  getCartTotal(): number {
-    return this.cartService.getCartTotal();
+  getProductsFromCart(): Product[] {
+    return this.cartProducts;
   }
 
   onDeleteProduct(product: Product): void {
-    this.cartService.deleteProduct(product);
+    this.store.dispatch(new RemoveProductFromCart(product));
   }
 
-  onIncreaseQuantity(id: number): void {
-    this.cartService.increaseQuantity(id);
+  onIncreaseQuantity(product: Product): void {
+    this.store.dispatch(new IncreaseProductQuantity(product));
   }
 
-  onDecreaseQuantity(id: number): void {
-    this.cartService.decreaseQuantity(id);
-  }
-
-  isCartEmpty(): boolean {
-    return this.cartService.isCartEmpty();
+  onDecreaseQuantity(product: Product): void {
+    this.store.dispatch(new DecreaseProductQuantity(product));
   }
 
   order(): void {
-    this.router.navigate(['/order']);
+    this.store.dispatch(new RouterActions.Go({
+      path: ['/order']
+    }));
   }
 
   getSortingOrder(): string {

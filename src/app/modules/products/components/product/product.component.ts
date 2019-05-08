@@ -5,9 +5,12 @@ import {
   OnInit,
   Output
 } from '@angular/core';
-import { Router } from '@angular/router';
+
+import * as RouterActions from '../../../../core/store/router/router.actions';
 
 import { Product } from '../../models/product.model';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../../../core/store/app.state';
 
 
 @Component({
@@ -21,7 +24,7 @@ export class ProductComponent implements OnInit {
   @Output() buy = new EventEmitter<Product>();
 
   constructor(
-    private router: Router
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
@@ -36,6 +39,8 @@ export class ProductComponent implements OnInit {
   }
 
   navigateToProductInfo(): void {
-    this.router.navigate(['/product', this.product.id]);
+    this.store.dispatch(new RouterActions.Go({
+      path: ['/product', this.product.id]
+    }));
   }
 }

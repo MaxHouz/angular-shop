@@ -2,13 +2,13 @@
   <h4 mat-line>{{ cartProduct.name }}</h4>
   <p mat-line> {{ cartProduct.price * cartProduct.quantity | currency: 'USD' }} </p>
   <div class="quantity-actions">
-    <button mat-button color="primary" (click)="onDecreaseQuantity(cartProduct.id)">
+    <button mat-button color="primary" (click)="onDecreaseQuantity()">
       <mat-icon>
         remove
       </mat-icon>
     </button>
     <span class="quantity-actions__counter">{{ cartProduct.quantity }}</span>
-    <button mat-button color="primary" (click)="onIncreaseQuantity(cartProduct.id)">
+    <button mat-button color="primary" (click)="onIncreaseQuantity()">
       <mat-icon>
         add
       </mat-icon>

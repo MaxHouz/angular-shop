@@ -1,5 +1,5 @@
 <section class="cart">
-  <mat-list *ngIf="!isCartEmpty(); else emptyCart">
+  <mat-list *ngIf="!(cartEmpty$ | async); else emptyCart">
     <mat-form-field>
       <mat-label>Sort by:</mat-label>
       <mat-select [(value)]="selectedSorting">
@@ -20,7 +20,7 @@
     </app-cart-item>
     <mat-divider></mat-divider>
     <mat-list-item>
-      <p class="cart-total">Total: {{ getCartTotal() | currency: 'USD' }}</p>
+      <p class="cart-total">Total: {{ cartCost$ | async | currency: 'USD' }}</p>
     </mat-list-item>
     <button (click)="order()"
             mat-stroked-button

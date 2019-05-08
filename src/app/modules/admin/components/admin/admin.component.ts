@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../core/store/app.state';
+import * as RouterActions from '../../../../core/store/router/router.actions';
 
 @Component({
   selector: 'app-admin',
@@ -10,21 +14,30 @@ export class AdminComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
   }
 
   navigateToAdminProducts(): void {
-    this.router.navigate(['./products'], { relativeTo: this.route });
+    this.store.dispatch(new RouterActions.Go({
+      path: ['./products'],
+      extras: { relativeTo: this.route }
+    }));
   }
 
   navigateAddProduct(): void {
-    this.router.navigate(['./products/add'], { relativeTo: this.route });
+    this.store.dispatch(new RouterActions.Go({
+      path: ['./products/add'],
+      extras: { relativeTo: this.route }
+    }));
   }
 
   navigateToOrders(): void {
-    this.router.navigate(['./orders'], { relativeTo: this.route });
+    this.store.dispatch(new RouterActions.Go({
+      path: ['./orders'],
+      extras: { relativeTo: this.route }
+    }));
   }
 }

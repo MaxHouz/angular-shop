@@ -1,7 +1,7 @@
 <button mat-button>
   <mat-icon
     (click)="openCartModal()"
-    [matBadge]="getProductsCount()"
+    [matBadge]="cartSize$ | async"
     matBadgeColor="warn">
     shopping_cart
   </mat-icon>

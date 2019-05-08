@@ -16,17 +16,17 @@ export class AppSettingsService {
     private localStorageService: LocalStorageService
   ) { }
 
-  initializeSettings(): Promise<any> {
+   initializeSettings(): Promise<any> {
     if (!!this.getSettingsFromLocalStorage()) {
       return Promise.resolve(this.getSettingsFromLocalStorage())
         .then(settings => this.appSettings = settings);
     } else {
-      return this.getLocalSettings()
-        .then(settings => {
-          this.appSettings = settings;
-          this.saveSettingToLocalStorage(settings);
-        })
-        .catch(() => this.appSettings = this.getDefaultSetting());
+        return this.getLocalSettings()
+          .then(settings => {
+            this.appSettings = settings;
+            this.saveSettingToLocalStorage(settings);
+          })
+          .catch(() => this.appSettings = this.getDefaultSetting());
     }
   }
 
@@ -52,7 +52,8 @@ export class AppSettingsService {
       title: 'Default title',
       version: '1.0.0',
       author: 'default',
-      environment: 'http://localhost:3001/'
+      environment: 'http://localhost:3001/',
+      mode: 'user'
     };
   }
 }
