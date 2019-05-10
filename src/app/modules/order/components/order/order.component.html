@@ -1,1 +1,8 @@
-<app-order-form></app-order-form>
+<ng-container *ngIf="!(cartEmpty$ | async); else emptyCart">
+  <app-order-form></app-order-form>
+</ng-container>
+<ng-template #emptyCart>
+  <p class="cart__empty">
+    Your cart is empty
+  </p>
+</ng-template>

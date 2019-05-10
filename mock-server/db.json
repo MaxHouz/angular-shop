@@ -35,7 +35,7 @@
   ],
   "orders": [
     {
-      "items": [
+      "products": [
         {
           "id": 1,
           "name": "Asus Zenbook",
@@ -43,17 +43,40 @@
           "category": "Notebooks",
           "description": "Ultra portable notebook",
           "isAvailable": true,
-          "quantity": 2
+          "quantity": 1
+        },
+        {
+          "id": 3,
+          "name": "Galaxy Buds",
+          "price": 150,
+          "category": "Headphones",
+          "description": "Samsung wireless headphones",
+          "isAvailable": true,
+          "quantity": 1
         }
       ],
-      "price": 3200,
-      "address": "Address",
-      "date": 1556963978455,
-      "completed": false,
+      "firstName": "fds",
+      "lastName": "fdsa",
+      "email": "dfs@fdas.fdas",
+      "phones": [
+        "3445",
+        "5423"
+      ],
+      "shippingDetails": {
+        "city": "Kyiv",
+        "address": "fdsagfdsh",
+        "firstName": "fds",
+        "lastName": "fdsa",
+        "email": "dfs@fdas.fdas",
+        "phones": [
+          "3445",
+          "5423"
+        ]
+      },
       "id": 1
     },
     {
-      "items": [
+      "products": [
         {
           "id": 1,
           "name": "Asus Zenbook",
@@ -61,32 +84,37 @@
           "category": "Notebooks",
           "description": "Ultra portable notebook",
           "isAvailable": true,
-          "quantity": 2
+          "quantity": 1
+        },
+        {
+          "id": 3,
+          "name": "Galaxy Buds",
+          "price": 150,
+          "category": "Headphones",
+          "description": "Samsung wireless headphones",
+          "isAvailable": true,
+          "quantity": 1
         }
       ],
-      "price": 3200,
-      "address": "Address",
-      "date": 1556974482564,
-      "completed": false,
+      "firstName": "Maks",
+      "lastName": "Shatailo",
+      "email": "max.shatailo@gmail.com",
+      "phones": [
+        "45647478u7456354",
+        "754525"
+      ],
+      "shippingDetails": {
+        "city": "Lviv",
+        "address": "gdsfg",
+        "firstName": "Maks",
+        "lastName": "Shatailo",
+        "email": "max.shatailo@gmail.com",
+        "phones": [
+          "45647478u7456354",
+          "754525"
+        ]
+      },
       "id": 2
-    },
-    {
-      "items": [
-        {
-          "id": 1,
-          "name": "Asus Zenbook",
-          "price": 1600,
-          "category": "Notebooks",
-          "description": "Ultra portable notebook",
-          "isAvailable": true,
-          "quantity": 4
-        }
-      ],
-      "price": 1600,
-      "address": "Address",
-      "date": 1557322825767,
-      "completed": false,
-      "id": 3
     }
   ]
 }
