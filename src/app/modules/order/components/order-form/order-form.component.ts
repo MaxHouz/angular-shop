@@ -31,12 +31,12 @@ export class OrderFormComponent implements OnInit, OnDestroy {
   contactsFormGroup: FormGroup;
   shippingFormGroup: FormGroup;
 
-  phones: FormArray = new FormArray([
-    new FormControl('', [Validators.required])
-  ]);
-  shippingPhones: FormArray = new FormArray([
-    new FormControl('')
-  ]);
+  phones: FormArray = new FormArray(
+    [new FormControl('', [Validators.required])]
+  );
+  shippingPhones: FormArray = new FormArray(
+    [new FormControl('', [Validators.required])]
+  );
 
   requiredErrorMessage = 'This field is required';
   emailErrorMessage: string;
@@ -63,7 +63,7 @@ export class OrderFormComponent implements OnInit, OnDestroy {
   addPhone($event: Event): void {
     $event.stopPropagation();
     this.phones.push(
-      new FormControl('')
+      new FormControl('', [Validators.required])
     );
   }
 
@@ -75,7 +75,7 @@ export class OrderFormComponent implements OnInit, OnDestroy {
   addShippingPhone($event: Event): void {
     $event.stopPropagation();
     this.shippingPhones.push(
-      new FormControl('')
+      new FormControl('', [Validators.required])
     );
   }
 
