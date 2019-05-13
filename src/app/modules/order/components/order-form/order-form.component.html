@@ -47,7 +47,7 @@
               delete_forever
             </mat-icon>
             <input matInput placeholder="Phone" [formControlName]="i">
-            <mat-error *ngIf="phones.length === 1">
+            <mat-error>
               {{ requiredErrorMessage }}
             </mat-error>
           </mat-form-field>
@@ -93,7 +93,7 @@
                 {{ requiredErrorMessage }}
               </mat-error>
             </mat-form-field>
-            <mat-checkbox formControlName="sameAsOrderDetails" (click)="setShippingDetails()">
+            <mat-checkbox formControlName="sameAsOrderDetails">
               Same as order details
             </mat-checkbox>
             <mat-form-field>
@@ -132,7 +132,7 @@
                   delete_forever
                 </mat-icon>
                 <input matInput placeholder="Phone" [formControlName]="i">
-                <mat-error *ngIf="shippingPhones.length === 1">
+                <mat-error>
                   {{ requiredErrorMessage }}
                 </mat-error>
               </mat-form-field>

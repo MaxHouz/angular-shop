@@ -116,27 +116,6 @@ export class OrderFormComponent implements OnInit, OnDestroy {
       });
   }
 
-  setShippingDetails(): void {
-    while (this.shippingPhones.length !== 0) {
-      this.shippingPhones.removeAt(0);
-    }
-    if (!this.shippingFormGroup.get('sameAsOrderDetails').value) {
-      this.shippingFormGroup.patchValue({
-        shippingFirstName: this.nameFormGroup.get('firstName').value,
-        shippingLastName: this.nameFormGroup.get('lastName').value,
-        shippingEmail: this.contactsFormGroup.get('email').value
-      });
-      this.phones.controls.forEach( control => this.shippingPhones.push(control));
-    } else {
-      this.shippingFormGroup.patchValue({
-        shippingFirstName: null,
-        shippingLastName: null,
-        shippingEmail: null
-      });
-      this.shippingPhones.push(new FormControl('', [Validators.required]));
-    }
-  }
-
   private initializeForm(): void {
     this.nameFormGroup = new FormGroup({
       firstName: new FormControl(
@@ -185,6 +164,10 @@ export class OrderFormComponent implements OnInit, OnDestroy {
       .subscribe(value => this.enableShipping(value));
     this.sub.add(shippingSub);
 
+    const shippingDetailsSub = this.shippingFormGroup.get('sameAsOrderDetails').valueChanges
+      .subscribe(value => this.setShippingDetails(value));
+    this.sub.add(shippingDetailsSub);
+
     const emailControl = this.contactsFormGroup.get('email');
     const shippingEmailControl = this.shippingFormGroup.get('shippingEmail');
 
@@ -200,6 +183,27 @@ export class OrderFormComponent implements OnInit, OnDestroy {
 
   private enableShipping(value: boolean): void {
     this.needShipping = value;
+  }
+
+  private setShippingDetails(value: boolean): void {
+    while (this.shippingPhones.length !== 0) {
+      this.shippingPhones.removeAt(0);
+    }
+    if (value) {
+      this.shippingFormGroup.patchValue({
+        shippingFirstName: this.nameFormGroup.get('firstName').value,
+        shippingLastName: this.nameFormGroup.get('lastName').value,
+        shippingEmail: this.contactsFormGroup.get('email').value
+      });
+      this.phones.controls.forEach( control => this.shippingPhones.push(control));
+    } else {
+      this.shippingFormGroup.patchValue({
+        shippingFirstName: null,
+        shippingLastName: null,
+        shippingEmail: null
+      });
+      this.shippingPhones.push(new FormControl('', [Validators.required]));
+    }
   }
 
   private setEmailErrorMessage(control: AbstractControl): void {
