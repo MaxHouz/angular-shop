@@ -144,7 +144,7 @@
       <button mat-raised-button
               type="submit"
               color="primary"
-              [disabled]="shippingFormGroup.invalid"
+              [disabled]="needShipping && shippingFormGroup.invalid"
               class="order-button">Confirm order</button>
     </mat-step>
   </mat-vertical-stepper>

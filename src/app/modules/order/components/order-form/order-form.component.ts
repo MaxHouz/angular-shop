@@ -40,6 +40,7 @@ export class OrderFormComponent implements OnInit, OnDestroy {
 
   requiredErrorMessage = 'This field is required';
   emailErrorMessage: string;
+  needShipping = false;
 
   private sub: Subscription;
   private productsList: Product[];
@@ -95,7 +96,8 @@ export class OrderFormComponent implements OnInit, OnDestroy {
         shippingForm.get('shippingEmail').value,
         shippingForm.get('shippingPhones').value,
       )
-      : {};
+      : null;
+
     const order = new Order(
       this.productsList,
       this.nameFormGroup.get('firstName').value,
@@ -104,6 +106,7 @@ export class OrderFormComponent implements OnInit, OnDestroy {
       this.contactsFormGroup.get('phones').value,
       shippingDetails
     );
+
     this.orderService.addOrder(order)
       .then(() => {
         this.store.dispatch(new CleanCart());
@@ -158,12 +161,15 @@ export class OrderFormComponent implements OnInit, OnDestroy {
 
     this.shippingFormGroup = new FormGroup({
       shipping: new FormControl(false),
-      city: new FormControl('Kyiv'),
-      address: new FormControl(),
+      city: new FormControl('Kyiv', [Validators.required]),
+      address: new FormControl('', [Validators.required]),
       sameAsOrderDetails: new FormControl(false),
-      shippingFirstName: new FormControl(),
-      shippingLastName: new FormControl(),
-      shippingEmail: new FormControl(),
+      shippingFirstName: new FormControl('', [Validators.required]),
+      shippingLastName: new FormControl('', [Validators.required]),
+      shippingEmail: new FormControl('', [
+        Validators.required,
+        Validators.email
+      ]),
       shippingPhones: this.shippingPhones
     });
 
@@ -193,36 +199,7 @@ export class OrderFormComponent implements OnInit, OnDestroy {
   }
 
   private enableShipping(value: boolean): void {
-    if (value) {
-      this.shippingFormGroup.get('city').setValidators([Validators.required]);
-      this.shippingFormGroup.get('address').setValidators([Validators.required]);
-      this.shippingFormGroup.get('shippingFirstName').setValidators([Validators.required]);
-      this.shippingFormGroup.get('shippingLastName').setValidators([Validators.required]);
-      this.shippingFormGroup.get('shippingEmail').setValidators([
-        Validators.required,
-        Validators.email
-      ]);
-      console.log(this.shippingFormGroup.get('shippingPhones'));
-      (<FormArray>this.shippingFormGroup.get('shippingPhones')).controls[0].setValidators([Validators.required]);
-      this.updateValidityForShippingForm();
-    } else {
-      this.shippingFormGroup.get('city').clearValidators();
-      this.shippingFormGroup.get('address').clearValidators();
-      this.shippingFormGroup.get('shippingFirstName').clearValidators();
-      this.shippingFormGroup.get('shippingLastName').clearValidators();
-      this.shippingFormGroup.get('shippingEmail').clearValidators();
-      (<FormArray>this.shippingFormGroup.get('shippingPhones')).controls[0].clearValidators();
-      this.updateValidityForShippingForm();
-    }
-  }
-
-  private updateValidityForShippingForm(): void {
-    this.shippingFormGroup.get('address').updateValueAndValidity();
-    this.shippingFormGroup.get('city').updateValueAndValidity();
-    this.shippingFormGroup.get('shippingFirstName').updateValueAndValidity();
-    this.shippingFormGroup.get('shippingLastName').updateValueAndValidity();
-    this.shippingFormGroup.get('shippingEmail').updateValueAndValidity();
-    this.shippingFormGroup.get('shippingPhones').updateValueAndValidity();
+    this.needShipping = value;
   }
 
   private setEmailErrorMessage(control: AbstractControl): void {

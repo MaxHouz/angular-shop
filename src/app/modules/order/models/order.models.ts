@@ -8,7 +8,7 @@ export class Order {
     public lastName: string,
     public email: string,
     public phones: string[],
-    public shippingDetails: ShippingDetails | {},
+    public shippingDetails: ShippingDetails,
     public id?: number
   ) {}
 }
