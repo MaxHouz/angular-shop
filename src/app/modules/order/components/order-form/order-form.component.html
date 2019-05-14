@@ -1,0 +1,151 @@
+<form (ngSubmit)="confirmOrder()" [formGroup]="orderForm" class="order-form">
+  <mat-vertical-stepper [linear]="true">
+    <mat-step [stepControl]="nameFormGroup" formGroupName="name">
+      <ng-template matStepLabel>Name</ng-template>
+      <div class="vertical">
+        <mat-form-field>
+          <input matInput placeholder="First name" formControlName="firstName">
+          <mat-error>
+            {{ requiredErrorMessage }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Last name" formControlName="lastName">
+          <mat-error>
+            {{ requiredErrorMessage }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <button type="button" mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="contactsFormGroup" formGroupName="contacts">
+      <ng-template matStepLabel>Contacts</ng-template>
+      <div class="vertical">
+        <mat-form-field>
+          <input matInput placeholder="E-mail" formControlName="email">
+          <mat-error>
+            {{ emailErrorMessage }}
+          </mat-error>
+        </mat-form-field>
+        <ng-container formArrayName="phones">
+          <mat-form-field *ngFor="let phone of phones.controls; let i = index" class="phone-input no-hover-effect">
+              <mat-icon color="primary"
+                        (click)="addPhone($event)"
+                        [ngClass]="{
+                          'remove-phone': phones.length === 1,
+                          'add-phone': phones.length > 1
+                        }">
+                add
+              </mat-icon>
+            <mat-icon
+              color="warn"
+              *ngIf="phones.length > 1"
+              (click)="removePhone($event, i)"
+              class="remove-phone">
+              delete_forever
+            </mat-icon>
+            <input matInput placeholder="Phone" [formControlName]="i">
+            <mat-error>
+              {{ requiredErrorMessage }}
+            </mat-error>
+          </mat-form-field>
+        </ng-container>
+      </div>
+      <div>
+        <button type="button" mat-button matStepperPrevious>Back</button>
+        <button type="button" mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step [stepControl]="shippingFormGroup" formGroupName="shipping">
+      <ng-template matStepLabel>Shipping</ng-template>
+      <mat-card>
+        <mat-slide-toggle
+          class="example-margin"
+          color="primary"
+          formControlName="shipping">
+          Need Shipping
+        </mat-slide-toggle>
+        <mat-expansion-panel
+          class="shipping-details"
+          [disabled]="!shippingFormGroup.get('shipping').value"
+          [expanded]="shippingFormGroup.get('shipping').value">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Shipping details
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="vertical">
+            <mat-form-field>
+              <mat-label>City</mat-label>
+              <mat-select formControlName="city">
+                <mat-option value="Kyiv">Kyiv</mat-option>
+                <mat-option value="Lviv">Lviv</mat-option>
+              </mat-select>
+              <mat-error>
+                {{ requiredErrorMessage }}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Address" formControlName="address">
+              <mat-error>
+                {{ requiredErrorMessage }}
+              </mat-error>
+            </mat-form-field>
+            <mat-checkbox formControlName="sameAsOrderDetails">
+              Same as order details
+            </mat-checkbox>
+            <mat-form-field>
+              <input matInput placeholder="First name" formControlName="shippingFirstName">
+              <mat-error>
+                {{ requiredErrorMessage }}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Last name" formControlName="shippingLastName">
+              <mat-error>
+                {{ requiredErrorMessage }}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="E-mail" formControlName="shippingEmail">
+              <mat-error>
+                {{ emailErrorMessage }}
+              </mat-error>
+            </mat-form-field>
+            <ng-container formArrayName="shippingPhones">
+              <mat-form-field *ngFor="let phone of shippingPhones.controls; let i = index" class="phone-input no-hover-effect">
+                <mat-icon color="primary"
+                          (click)="addShippingPhone($event)"
+                          [ngClass]="{
+                          'remove-phone': shippingPhones.length === 1,
+                          'add-phone': shippingPhones.length > 1
+                        }">
+                  add
+                </mat-icon>
+                <mat-icon
+                  color="warn"
+                  *ngIf="shippingPhones.length > 1"
+                  (click)="removeShippingPhone($event, i)"
+                  class="remove-phone">
+                  delete_forever
+                </mat-icon>
+                <input matInput placeholder="Phone" [formControlName]="i">
+                <mat-error>
+                  {{ requiredErrorMessage }}
+                </mat-error>
+              </mat-form-field>
+            </ng-container>
+          </div>
+        </mat-expansion-panel>
+      </mat-card>
+      <button type="button" mat-button matStepperPrevious class="order-button">Back</button>
+      <button mat-raised-button
+              type="submit"
+              color="primary"
+              [disabled]="needShipping && shippingFormGroup.invalid"
+              class="order-button">Confirm order</button>
+    </mat-step>
+  </mat-vertical-stepper>
+</form>

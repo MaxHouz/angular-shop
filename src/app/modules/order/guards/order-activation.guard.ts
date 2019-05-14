@@ -5,7 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../../../core/store/app.state';
-import { CartState } from '../../../core/store/cart/cart.state';
+import { getCartEmpty } from '../../../core/store/cart/cart.selectors';
 import * as RouterActions from '../../../core/store/router/router.actions';
 
 @Injectable({
@@ -18,8 +18,8 @@ export class OrderActivationGuard implements CanActivate, OnDestroy {
   constructor(
     private store: Store<AppState>
   ) {
-    this.sub = this.store.pipe(select('cart'))
-      .subscribe( (cartState: CartState) => this.cartEmpty = cartState.empty);
+    this.sub = this.store.pipe(select(getCartEmpty))
+      .subscribe((cartEmpty: boolean) => this.cartEmpty = cartEmpty);
   }
 
   ngOnDestroy() {

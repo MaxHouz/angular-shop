@@ -1,0 +1,35 @@
+.vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-form {
+  width: 40%;
+}
+
+.shipping-details {
+  margin-top: 20px;
+}
+
+.order-button {
+  margin-top: 20px;
+  display: block;
+}
+
+.phone-input {
+  position: relative;
+}
+
+.add-phone {
+  position: absolute;
+  top: 0;
+  right: 40px;
+  cursor: pointer;
+}
+
+.remove-phone {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}

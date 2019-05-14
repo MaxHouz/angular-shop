@@ -1,7 +1,8 @@
-<h3>Your order: </h3>
-<p>Items: {{ cartProducts | json }}</p>
-<p>Price: {{ cartCost | currency: 'USD' }}</p>
-<button mat-raised-button
-        color="primary"
-        class="order-button"
-        (click)="onConfirmation()">Confirm order</button>
+<ng-container *ngIf="!(cartEmpty$ | async); else emptyCart">
+  <app-order-form></app-order-form>
+</ng-container>
+<ng-template #emptyCart>
+  <p class="cart__empty">
+    Your cart is empty
+  </p>
+</ng-template>

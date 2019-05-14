@@ -9,7 +9,6 @@ import * as RouterActions from '../../../../core/store/router/router.actions';
 
 import { Product } from '../../models/product.model';
 
-import { CartService } from '../../../cart/services/cart.service';
 import { ProductsService } from '../../services/products.service';
 
 @Component({
@@ -22,7 +21,6 @@ export class ProductsListComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private cartService: CartService,
     private productsService: ProductsService
   ) {}
 

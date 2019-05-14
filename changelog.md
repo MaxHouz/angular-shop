@@ -24,3 +24,4 @@
 - Added NgRx store for Cart(actions, reducer, feature/state selectors)
 - Added cart synchronization with local storage with NgRx effects
 - Implemented navigation with @ngrx/router-store
+- Implemented reactive form for order component
