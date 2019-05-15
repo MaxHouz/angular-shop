@@ -25,3 +25,7 @@
 - Added cart synchronization with local storage with NgRx effects
 - Implemented navigation with @ngrx/router-store
 - Implemented reactive form for order component
+- Covered components from products module with integrated unit tests
+- Covered cart and product services, orderBy pipe with unit tests
+- Covered app component with shallow unit test
+- Generated coverage report

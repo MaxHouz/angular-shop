@@ -21,12 +21,12 @@
     <div class="actions">
       <button mat-raised-button
               color="primary"
-              class="order-button"
+              class="order-button order-button_buy"
               [disabled]="!product.isAvailable"
               (click)="onBuy()">Buy</button>
       <button mat-stroked-button
               color="accent"
-              class="order-button"
+              class="order-button order-button_add"
               [disabled]="!product.isAvailable"
               (click)="onAddToCart()">Add to cart</button>
     </div>

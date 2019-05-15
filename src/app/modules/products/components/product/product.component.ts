@@ -9,8 +9,8 @@ import {
 import * as RouterActions from '../../../../core/store/router/router.actions';
 
 import { Product } from '../../models/product.model';
-import {Store} from '@ngrx/store';
-import {AppState} from '../../../../core/store/app.state';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../../core/store/app.state';
 
 
 @Component({
